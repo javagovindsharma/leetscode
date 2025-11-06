@@ -2,12 +2,14 @@
 comments: true
 difficulty: Hard
 edit_url: https://github.com/doocs/leetcode/edit/main/solution/3400-3499/3420.Count%20Non-Decreasing%20Subarrays%20After%20K%20Operations/README_EN.md
+rating: 2854
+source: Weekly Contest 432 Q4
 tags:
     - Stack
     - Segment Tree
     - Queue
     - Array
-    - Two Pointers
+    - Sliding Window
     - Monotonic Queue
     - Monotonic Stack
 ---
