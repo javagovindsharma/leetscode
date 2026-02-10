@@ -1,0 +1,61 @@
+COntributed By: Rohit Nimkar (csrohit.github.io)
+
+Which of the following libraries stores and communicates data using blobs?
+caffe 
+
+what is a tensor?
+an n- dimentional array
+
+Which of the following library comes with visualization tool for deep learning?
+tensorflow
+
+Which of the following libraries is mainly designed for machine vision?
+caffe
+
+Which of the following libraries uses computations graph of deeplearning?
+Tensorflow
+
+Deep learning software platforms are available as downloadable package.
+True
+
+Deep learning performs better when sequential processing is used.
+F
+
+Deep learning are not suitable for text analysis.
+F 
+
+In Pruning technique initally we start with small number of neurons.
+F
+
+FPGAs are power efficienct when compared to GPU.
+T
+
+Convolutional neural network is mainly used for image recognition. 
+T
+
+Learning rate is learnt by the network when training. 
+T 
+
+What is ment by precision in terms of deep learning metrics?
+difference between actual and predicted value
+
+Which of the function always maps the values between 0 and 1?
+sigmoid
+
+Formula for recall is 
+TP/(TP + FN) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
