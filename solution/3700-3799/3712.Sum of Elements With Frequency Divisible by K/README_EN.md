@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Easy
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3712.Sum%20of%20Elements%20With%20Frequency%20Divisible%20by%20K/README_EN.md
 rating: 1198
 source: Weekly Contest 471 Q1
 tags:
@@ -93,6 +92,14 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1: Counting
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> The condition depends only on whether each value's frequency is divisible by $k$, not on positions. With $n\le 100$, a frequency map is enough; each qualifying value is added as many times as it occurs.
+
+<!-- thinking:end -->
 
 We use a hash table $\textit{cnt}$ to record the frequency of each number. We traverse the array $\textit{nums}$, and for each number $x$, we increment $\textit{cnt}[x]$ by $1$.
 

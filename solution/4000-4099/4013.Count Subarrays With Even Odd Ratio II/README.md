@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 困难
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4013.Count%20Subarrays%20With%20Even%20Odd%20Ratio%20II/README.md
 rating: 2155
 source: 第 513 场周赛 Q4
 tags:
@@ -199,6 +198,18 @@ tags:
 <!-- solution:start -->
 
 ### 方法一：前缀和 + 树状数组
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 上一问的双重枚举在 $n=10^5$ 时不可用。原条件 $y>0$ 且 $\frac{x}{y}\le\frac{a}{b}$ 在 $b>0$ 时可改写为 $a y-b x\ge 0$；全为偶数的子数组会使该式为负，因而两种限制可以合并。
+>
+> 把奇数记为 $+a$、偶数记为 $-b$ 后，问题变成统计元素和 $\ge 0$ 的非空子数组，即有多少对前缀和满足 $s[L]\le s[R]$。
+>
+> 按 $R$ 扫描时，对离散化后的前缀和用树状数组维护左侧出现次数，查询不超过 $s[R]$ 的个数再插入当前值。
+
+<!-- thinking:end -->
 
 对于一个子数组，设其中偶数元素的个数为 $x$，奇数元素的个数为 $y$。题目要求 $y > 0$ 且 $\frac{x}{y} \le \frac{a}{b}$。由于 $b > 0$, $y > 0$，该不等式等价于 $a \cdot y - b \cdot x \ge 0$。
 

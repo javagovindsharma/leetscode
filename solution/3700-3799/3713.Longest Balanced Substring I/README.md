@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 中等
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3713.Longest%20Balanced%20Substring%20I/README.md
 rating: 1490
 source: 第 471 场周赛 Q2
 tags:
@@ -84,6 +83,14 @@ tags:
 <!-- solution:start -->
 
 ### 方法一：枚举 + 计数
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> $n\le 1000$，枚举所有子串可行。平衡意味着每种出现过的字符次数相同，即「最大频次 $\times$ 种类数 $=$ 长度」。固定左端点向右扫描并维护频次与种类数，即可在 $O(n^2)$ 内更新答案。
+
+<!-- thinking:end -->
 
 我们可以在 $[0,..n-1]$ 范围内枚举子串的起始位置 $i$，然后在 $[i,..,n-1]$ 范围内枚举子串的结束位置 $j$，并使用哈希表 $\textit{cnt}$ 记录子串 $s[i..j]$ 中每个字符出现的次数。我们使用变量 $\textit{mx}$ 记录子串中出现次数最多的字符的出现次数，使用变量 $v$ 记录子串中不同字符的个数。如果在某个位置 $j$，满足 $\textit{mx} \times v = j - i + 1$，则说明子串 $s[i..j]$ 是一个平衡子串，我们更新答案 $\textit{ans} = \max(\textit{ans}, j - i + 1)$。
 
@@ -212,6 +219,41 @@ function longestBalanced(s: string): number {
         }
     }
     return ans;
+}
+```
+
+#### Rust
+
+```rust
+impl Solution {
+    pub fn longest_balanced(s: String) -> i32 {
+        let n: i32 = s.len() as i32;
+        let bytes = s.as_bytes();
+        let mut ans: i32 = 0;
+
+        for i in 0..n {
+            let mut cnt: [i32; 26] = [0; 26];
+            let mut mx: i32 = 0;
+            let mut v: i32 = 0;
+
+            for j in i..n {
+                let c: usize = (bytes[j as usize] - b'a') as usize;
+                cnt[c] += 1;
+
+                if cnt[c] == 1 {
+                    v += 1;
+                }
+
+                mx = mx.max(cnt[c]);
+
+                if mx * v == j - i + 1 {
+                    ans = ans.max(j - i + 1);
+                }
+            }
+        }
+
+        ans
+    }
 }
 ```
 

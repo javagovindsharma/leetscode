@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Hard
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3725.Count%20Ways%20to%20Choose%20Coprime%20Integers%20from%20Rows/README_EN.md
 rating: 1981
 source: Biweekly Contest 168 Q4
 tags:
@@ -100,6 +99,14 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> We pick exactly one integer from each row and must count ways modulo $10^9+7$; enumerating tuples grows exponentially with the number of rows. Only the overall $\gcd$ matters, so we DP row by row with state equal to the $\gcd$ so far, and sum the ways whose final $\gcd$ is $1$.
+
+<!-- thinking:end -->
 
 <!-- tabs:start -->
 

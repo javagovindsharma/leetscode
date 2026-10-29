@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 简单
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3701.Compute%20Alternating%20Sum/README.md
 rating: 1228
 source: 第 470 场周赛 Q1
 tags:
@@ -75,6 +74,14 @@ tags:
 <!-- solution:start -->
 
 ### 方法一：模拟
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 数组长度不超过 $100$，直接按定义累加即可。交替和正是偶数下标之和减去奇数下标之和，用切片一次取完两段即可，不必再按奇偶分支书写循环。
+
+<!-- thinking:end -->
 
 我们可以直接遍历数组 $\textit{nums}$，对于每个下标 $i$，如果 $i$ 是偶数，则将 $\textit{nums}[i]$ 加到答案中，否则将 $\textit{nums}[i]$ 减去。
 

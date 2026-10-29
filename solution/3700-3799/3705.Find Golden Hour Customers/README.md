@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 中等
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3705.Find%20Golden%20Hour%20Customers/README.md
 tags:
     - 数据库
 ---
@@ -158,6 +157,14 @@ order_timestamp 同时包含日期和时间信息。
 
 ### 方法一：分组统计
 
+<!-- thinking:start -->
+
+> **思考**
+>
+> 判定条件同时依赖每位顾客的订单总数、峰值时段占比、有效评分比例与平均分，逐行手写循环容易漏条件。按 `customer_id` 分组即可一次得到这些聚合量，再按阈值筛选并按平均分、顾客编号排序。
+
+<!-- thinking:end -->
+
 我们可以将订单按照 `customer_id` 进行分组，统计每个顾客的总订单数、峰值时段订单数、评分订单数和平均评分，然后根据题目中的条件进行筛选，最后按照平均评分降序、顾客 ID 降序排序。
 
 <!-- tabs:start -->
@@ -180,7 +187,10 @@ FROM restaurant_orders
 GROUP BY customer_id
 HAVING
     total_orders >= 3
-    AND peak_hour_percentage >= 60
+    AND 5 * SUM(
+        TIME(order_timestamp) BETWEEN '11:00:00' AND '14:00:00'
+        OR TIME(order_timestamp) BETWEEN '18:00:00' AND '21:00:00'
+    ) >= 3 * COUNT(1)
     AND average_rating >= 4.0
     AND SUM(order_rating IS NOT NULL) / total_orders >= 0.5
 ORDER BY average_rating DESC, customer_id DESC;
@@ -217,7 +227,7 @@ def find_golden_hour_customers(restaurant_orders: pd.DataFrame) -> pd.DataFrame:
     ).round()
     filtered = grouped[
         (grouped["total_orders"] >= 3)
-        & (grouped["peak_hour_percentage"] >= 60)
+        & (5 * grouped["peak_hour_count"] >= 3 * grouped["total_orders"])
         & (grouped["average_rating"] >= 4.0)
         & (grouped["non_null_rating_count"] / grouped["total_orders"] >= 0.5)
     ]

@@ -1,7 +1,11 @@
 ---
 comments: true
 difficulty: 中等
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4040.Minimum%20Operations%20to%20Form%20Subset%20Sum%20I/README.md
+rating: 1869
+source: 第 517 场周赛 Q3
+tags:
+    - 数组
+    - 动态规划
 ---
 
 <!-- problem:start -->
@@ -92,6 +96,18 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4040.Mi
 <!-- solution:start -->
 
 ### 方法一：0-1 背包
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 对同一元素又乘又除，净值只需 $|a-b|$ 次单向操作就能得到，混用只会浪费步数。因此每个元素要么连乘 $2$，要么连除 $2$，要么不选。
+>
+> 取值与代价构成 $0$-$1$ 背包物品，容量为给定的 $\textit{sum}$。 $n\le 100$、 $S\le 5000$，再枚举 $O(\log S)$ 次放缩，可以承受。
+>
+> 倒序更新容量，保证每个元素至多使用一次；若 $f[\textit{sum}]$ 仍为无穷，则无解。
+
+<!-- thinking:end -->
 
 对某个元素先做 $a$ 次乘法再做 $b$ 次除法，得到的值是 $\lfloor x \times 2^a / 2^b \rfloor$，也就是 $x \times 2^{a-b}$ 或者 $\lfloor x / 2^{b-a} \rfloor$。同样的值只用 $|a - b|$ 次操作就能得到，而混着做要花 $a + b$ 次，因此两种操作不会同时使用。于是每个元素只有两类取值：花 $i$ 次操作变成 $x \times 2^i$，或者花 $i$ 次操作变成 $\lfloor x / 2^i \rfloor$；而不选入子集的元素不需要任何操作。
 

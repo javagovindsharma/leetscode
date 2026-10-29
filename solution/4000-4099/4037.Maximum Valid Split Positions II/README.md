@@ -1,7 +1,13 @@
 ---
 comments: true
 difficulty: 困难
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4037.Maximum%20Valid%20Split%20Positions%20II/README.md
+rating: 2372
+source: 第 190 场双周赛 Q4
+tags:
+    - 数组
+    - 数学
+    - 枚举
+    - 数论
 ---
 
 <!-- problem:start -->
@@ -154,6 +160,18 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4037.Ma
 <!-- solution:start -->
 
 ### 方法一：前后缀 GCD + 枚举候选删除位置
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 上一题对每个删除位置 $O(n)$ 计分，在 $n=10^5$ 时不可用。前缀 GCD 每一项都是前一项的约数，整条链至多变化 $O(\log M)$ 次。
+>
+> 若某下标处前缀与后缀 GCD 都未变化，删除它既不改其余前缀、后缀，又只会把两个分割点合并，得分不增。因此只有 GCD 发生变化的下标值得重算。
+>
+> 正向、反向各标记一次得到至多 $O(\log M)$ 个候选，对每个候选删除后重新计分，与不删除的得分取最大。
+
+<!-- thinking:end -->
 
 沿用上一题的思路，对于长度为 $m$ 的数组 $\textit{arr}$，我们预处理出前缀 GCD 数组 $\textit{pre}$ 和后缀 GCD 数组 $\textit{suf}$，那么分割位置 $i$ 有效当且仅当 $\textit{pre}[i] = \textit{suf}[i + 1]$，统计满足条件的下标个数即为 $\textit{arr}$ 的得分。但本题 $n$ 可以达到 $10^5$，逐个枚举被移除的下标再 $O(n)$ 统计会超时。
 

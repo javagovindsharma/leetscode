@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Hard
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4027.Elevator%20Requests%20III/README_EN.md
 rating: 2200
 source: Weekly Contest 515 Q4
 tags:
@@ -105,6 +104,18 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1: State Compression DP
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> Floor indices reach $10^9$, but there are only $m\le 16$ requests, which is exactly the size of a subset TSP. Arrival times are lower bounds: arriving early forces a wait.
+>
+> $f[S][j]$ is the earliest time to have processed set $S$ and ended on request $j$. From the empty set the cost is $\max(|\textit{start}-\textit{floor}_j|,\textit{arrival}_j)$; otherwise we enumerate the previous request $j_0$ and take $\max(f[S\setminus\{j\}][j_0]+\text{distance},\textit{arrival}_j)$.
+>
+> The minimum over the last index on the full set is the time to finish every request.
+
+<!-- thinking:end -->
 
 The number of floors $n$ can be as large as $10^9$, but there are at most $m \le 16$ requests, so we only need to plan a path among at most $m$ target floors.
 

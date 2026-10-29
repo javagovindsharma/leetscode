@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 中等
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4014.Minimum%20Total%20Price%20After%20Applying%20Discounts/README.md
 rating: 1192
 source: 第 514 场周赛 Q1
 ---
@@ -104,6 +103,18 @@ source: 第 514 场周赛 Q1
 <!-- solution:start -->
 
 ### 方法一：贪心 + 排序
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 折扣节省额为 $p\times d/100$，同一折扣加在更贵的商品上节省更多。若反复挑选当前节省最大的一对，每次都要扫描剩余价格与折扣。
+>
+> 将价格与折扣各自排序后从大到小配对，即可把较大折扣用在较高价格上，与反复挑选的贪心等价。
+>
+> 折扣用尽后，剩余商品按原价累加。
+
+<!-- thinking:end -->
 
 为了最小化总价，我们需要最大化折扣节省的总金额。若把折扣 $d$ 应用于价格为 $p$ 的商品，节省的金额为 $p \times d / 100$。根据排序不等式，把较大的折扣用在价格较高的商品上，可以使节省的总金额最大。
 

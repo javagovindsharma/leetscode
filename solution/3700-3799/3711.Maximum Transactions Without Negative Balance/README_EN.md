@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3711.Maximum%20Transactions%20Without%20Negative%20Balance/README_EN.md
 tags:
     - Greedy
     - Array
@@ -81,6 +80,14 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1: Greedy + Ordered Set
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> Transactions must stay in order but may be skipped, and $n\le 10^5$ rules out backtracking. We greedily take every transaction and, whenever the balance goes negative, drop the smallest chosen amount (the one that hurts the balance most). An ordered set deletes that minimum in $O(\log n)$.
+
+<!-- thinking:end -->
 
 We use an ordered set (such as C++'s multiset, Java's TreeMap, Python's SortedList) to store the selected transaction amounts, and maintain a variable $s$ to record the current balance. Initially $s=0$, and the answer $\textit{ans}$ is initialized to the number of transactions.
 

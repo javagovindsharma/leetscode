@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4025.Minimize%20the%20Maximum%20Waiting%20Time%20at%20Synchronized%20Traffic%20Lights/README_EN.md
 rating: 1456
 source: Weekly Contest 515 Q2
 tags:
@@ -115,6 +114,18 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1: Greedy
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> The lights share one period. Car $j$ arrives at residue $r=\textit{arrivalTime}[j]\bmod \textit{period}$. Enumerating assignments for every car would repeat the same arithmetic.
+>
+> Let $\textit{mx}$ be the longest green. If $r<\textit{mx}$, sending the car to that light yields wait $0$; if $r\ge\textit{mx}$, the car has missed every green and waits $\textit{period}-r$ at every light.
+>
+> The penalty is therefore the maximum wait among cars with $r\ge\textit{mx}$, or $0$ if no such car exists.
+
+<!-- thinking:end -->
 
 Let $\textit{mx} = \max(\textit{lights})$ be the longest green duration. For car $j$, let $r = \textit{arrivalTime}[j] \bmod \textit{period}$.
 

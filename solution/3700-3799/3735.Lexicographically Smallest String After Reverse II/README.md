@@ -1,7 +1,12 @@
 ---
 comments: true
 difficulty: 困难
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3735.Lexicographically%20Smallest%20String%20After%20Reverse%20II/README.md
+tags:
+    - 字符串
+    - 二分查找
+    - 后缀数组
+    - 哈希函数
+    - 滚动哈希
 ---
 
 <!-- problem:start -->
@@ -90,6 +95,14 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3735.Le
 <!-- solution:start -->
 
 ### 方法一
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 与仅反转一段前缀或后缀的题目相同：必须恰好操作一次， $k$ 的取值只有 $n$ 种。枚举每个 $k$，比较反转前 $k$ 位与反转后 $k$ 位两种结果，取字典序最小者。
+
+<!-- thinking:end -->
 
 <!-- tabs:start -->
 

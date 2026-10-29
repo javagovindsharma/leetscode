@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4002.Count%20Valid%20Sequences/README_EN.md
 rating: 1912
 source: Weekly Contest 512 Q3
 tags:
@@ -148,6 +147,18 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1: Combinatorics
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> The number of compositions of $n$ into $k$ positive parts is $\binom{n-1}{k-1}$. The product is even if and only if at least one part is even, so we subtract the all-odd compositions from the total.
+>
+> All-odd compositions exist only when $n$ and $k$ have the same parity. Substituting $2a_i+1$ yields $\sum a_i=(n-k)/2$, i.e. $\binom{(n+k)/2-1}{k-1}$; otherwise that term is $0$.
+>
+> With $n$ and $k$ up to $5\times 10^5$, each binomial coefficient needs precomputed factorials and inverse factorials. Queries then subtract modulo $10^9+7$ in $O(1)$.
+
+<!-- thinking:end -->
 
 The number of ordered ways to write $n$ as a sum of $k$ positive integers is $\binom{n-1}{k-1}$. An even product means "at least one even number"; the complement is "all odd".
 

@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Hard
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4028.Minimum%20Operations%20to%20Make%20a%20Rotated%20Palindrome%20II/README_EN.md
 tags:
     - Math
     - String
@@ -76,6 +75,18 @@ One optimal solution:
 <!-- solution:start -->
 
 ### Solution 1: FFT
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> The pairing model is the same as in the rotated-palindrome I problem, but $n$ reaches $5\times 10^4$, so enumerating $k$ and scanning pairs is no longer feasible.
+>
+> After $k$ left rotations, every palindromic pair has original indices summing to the same $c=(2k+n-1)\bmod n$ modulo $n$. The remaining work is the total shorter-arc cost for every index-sum $c$.
+>
+> That cost is an even function on $\mathbb{Z}/26\mathbb{Z}$. Its DFT followed by a circular convolution yields every $c$ at once; we add the rotation count $k$ and take the minimum. Conjugate symmetry leaves only $14$ frequencies.
+
+<!-- thinking:end -->
 
 This problem is the same as "Minimum Operations to Make a Rotated Palindrome I", but $n$ can be as large as $5 \times 10^4$, so enumerating rotations and pairing characters naively is too slow.
 

@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 困难
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4028.Minimum%20Operations%20to%20Make%20a%20Rotated%20Palindrome%20II/README.md
 tags:
     - 数学
     - 字符串
@@ -79,6 +78,18 @@ tags:
 <!-- solution:start -->
 
 ### 方法一：FFT
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 与「旋转回文 I」相同的配对模型， $n$ 升至 $5\times 10^4$，再枚举 $k$ 后线性配对不可行。
+>
+> 左旋 $k$ 次后，每对回文下标在原串中的下标之和模 $n$ 都等于同一常数 $c=(2k+n-1)\bmod n$，于是问题变成对所有下标和求字母环上较短弧长之和。
+>
+> 该代价是 $\mathbb{Z}/26\mathbb{Z}$ 上的偶函数，对其 DFT 后做圆周卷积，一次得到全部 $c$ 的代价；再与旋转次数 $k$ 相加取最小。因共轭对称，只需计算 $14$ 个频率。
+
+<!-- thinking:end -->
 
 本题与「得到旋转回文字符串的最少操作次数 I」相同，但 $n$ 可达 $5 \times 10^4$，无法枚举旋转次数后暴力配对。
 

@@ -1,12 +1,17 @@
 ---
 comments: true
 difficulty: 简单
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4038.Count%20Integers%20Appearing%20in%20a%20Single%20Block/README.md
+rating: 1165
+source: 第 517 场周赛 Q1
+tags:
+    - 数组
+    - 哈希表
+    - 计数
 ---
 
 <!-- problem:start -->
 
-# [4038. 统计特殊整数个数](https://leetcode.cn/problems/count-integers-appearing-in-a-single-block)
+# [4038. 计算单个区间中出现的整数数量](https://leetcode.cn/problems/count-integers-appearing-in-a-single-block)
 
 [English Version](/solution/4000-4099/4038.Count%20Integers%20Appearing%20in%20a%20Single%20Block/README_EN.md)
 
@@ -73,6 +78,18 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4038.Co
 <!-- solution:start -->
 
 ### 方法一：统计每个整数所在的块数
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 特殊整数是恰好只形成一段连续相等块的值。若先按值收集全部下标再判断是否连成一段，需要额外的下标列表。
+>
+> 遍历数组，在块的起点给该值的计数加一，最后统计计数恰好为 $1$ 的值的个数。
+>
+> 值域只有 $100$，用计数器即可。
+
+<!-- thinking:end -->
 
 把数组中每一段极大的连续相等元素称为一个 **块**。整数 $x$ 是特殊整数，当且仅当 $x$ 恰好只构成一个块。
 

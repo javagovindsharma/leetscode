@@ -1,0 +1,249 @@
+---
+comments: true
+difficulty: 简单
+rating: 1209
+source: 第 518 场周赛 Q1
+tags:
+    - 字符串
+    - 枚举
+    - 滑动窗口
+---
+
+<!-- problem:start -->
+
+# [4043. 恰好有 K 对相等相邻字符的循环移位数量](https://leetcode.cn/problems/count-rotations-with-exactly-k-equal-adjacent-pairs)
+
+[English Version](/solution/4000-4099/4043.Count%20Rotations%20With%20Exactly%20K%20Equal%20Adjacent%20Pairs/README_EN.md)
+
+## 题目描述
+
+<!-- description:start -->
+
+<p>给你一个长度为 <code>n</code> 的字符串 <code>s</code> 和一个整数 <code>k</code>。</p>
+
+<p><code>s</code> 的一次&nbsp;<strong>循环移位&nbsp;</strong>可以通过以下方式得到：选择 <code>s</code> 的一个长度在 0 到 <code>n - 1</code>（包含两端）之间的&nbsp;<strong>前缀</strong>&nbsp;，并将其移动到字符串末尾，同时保持所有字符的相对顺序不变。</p>
+
+<p>对于 <code>s</code> 的<strong>&nbsp;每一种&nbsp;</strong>循环移位，定义其&nbsp;<strong>得分</strong>&nbsp;为满足以下条件的下标 <code>i</code> 的数量：<code>0 &lt;= i &lt; n - 1</code>，且位置 <code>i</code> 和 <code>i + 1</code> 处的字符相同。</p>
+
+<p>返回得分等于 <code>k</code> 的循环移位数量。</p>
+
+<p>字符串的<strong>&nbsp;前缀</strong>&nbsp;是指从字符串开头开始，并延伸到字符串中某个位置的子串。</p>
+
+<p><strong>子串</strong>&nbsp;是字符串中一段连续的字符序列，可以为空。</p>
+
+<p>&nbsp;</p>
+
+<p><strong class="example">示例 1：</strong></p>
+
+<div class="example-block">
+<p><strong>输入：</strong> <span class="example-io">s = "aab", k = 1</span></p>
+
+<p><strong>输出：</strong> <span class="example-io">2</span></p>
+
+<p><strong>解释：</strong></p>
+
+<p><code>s</code> 的所有循环移位为：</p>
+
+<ul>
+	<li><code>"aab"</code>：位置 0 和 1 处的字符相同，因此 <code>score = 1</code>。</li>
+	<li><code>"aba"</code>：不存在两个相邻且相同的字符，因此 <code>score = 0</code>。</li>
+	<li><code>"baa"</code>：位置 1 和 2 处的字符相同，因此 <code>score = 1</code>。</li>
+</ul>
+
+<p>共有 2 种 <code>s</code> 的循环移位，其 <code>score</code> 等于 <code>k</code>，因此答案为 2。</p>
+</div>
+
+<p><strong class="example">示例 2：</strong></p>
+
+<div class="example-block">
+<p><strong>输入：</strong> <span class="example-io">s = "abca", k = 0</span></p>
+
+<p><strong>输出：</strong> <span class="example-io">1</span></p>
+
+<p><strong>解释：</strong></p>
+
+<p><code>s</code> 的所有循环移位为：</p>
+
+<ul>
+	<li><code>"abca"</code>：不存在两个相邻且相同的字符，因此 <code>score = 0</code>。</li>
+	<li><code>"bcaa"</code>：位置 2 和 3 处的字符相同，因此 <code>score = 1</code>。</li>
+	<li><code>"caab"</code>：位置 1 和 2 处的字符相同，因此 <code>score = 1</code>。</li>
+	<li><code>"aabc"</code>：位置 0 和 1 处的字符相同，因此 <code>score = 1</code>。</li>
+</ul>
+
+<p>只有 1 种 <code>s</code> 的循环移位，其 <code>score</code> 等于 <code>k</code>，因此答案为 1。</p>
+</div>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+	<li><code>2 &lt;= n == s.length &lt;= 100</code></li>
+	<li><code>s</code> 仅由小写英文字母组成。</li>
+	<li><code>0 &lt;= k &lt;= n - 1</code></li>
+</ul>
+
+<!-- description:end -->
+
+## 解法
+
+<!-- solution:start -->
+
+### 方法一：模拟
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 循环左移只改动串首与串尾两处相邻对，中间的相等关系保持不变。若对每个旋转重建字符串再计数，总时间是平方级的。
+>
+> 先计算原串得分，再每次 $O(1)$ 减去失去的首部相邻对、加上新增的尾部相邻对，统计得分等于 $k$ 的旋转次数。
+>
+> 下标对 $n$ 取模即可在原串上完成 $n$ 次旋转。
+
+<!-- thinking:end -->
+
+记字符串长度为 $n$。我们先计算原串 $s$ 的得分 $\textit{score}$，即满足 $s[i] = s[i + 1]$（ $0 \leq i < n - 1$）的下标数量。若 $\textit{score} = k$，则将答案加 $1$。
+
+接下来从原串出发，依次循环左移一位，共进行 $n - 1$ 次。第 $t$ 次左移（ $t = 0, 1, \ldots, n - 2$）时，移到末尾的字符为 $s[t]$，得分仅有两处变化：
+
+- 失去原先首部的相邻对，即 $s[t]$ 与 $s[t + 1]$；
+- 新增尾部的相邻对，即 $s[t - 1]$ 与 $s[t]$。
+
+其中下标对 $n$ 取模。因此可以 $O(1)$ 更新 $\textit{score}$，并统计得分等于 $k$ 的循环移位数量。
+
+时间复杂度 $O(n)$，空间复杂度 $O(1)$。其中 $n$ 是字符串 $s$ 的长度。
+
+<!-- tabs:start -->
+
+#### Python3
+
+```python
+class Solution:
+    def countRotations(self, s: str, k: int) -> int:
+        n = len(s)
+        score = sum(a == b for a, b in pairwise(s))
+        ans = int(score == k)
+
+        for i in range(n, n * 2 - 1):
+            score += int(s[i % n] == s[(i - 1) % n])
+            score -= int(s[i % n] == s[(i + 1) % n])
+            ans += int(score == k)
+
+        return ans
+```
+
+#### Java
+
+```java
+class Solution {
+    public int countRotations(String s, int k) {
+        int n = s.length();
+        int score = 0;
+
+        for (int i = 0; i < n - 1; i++) {
+            score += s.charAt(i) == s.charAt(i + 1) ? 1 : 0;
+        }
+
+        int ans = score == k ? 1 : 0;
+
+        for (int i = n; i < n * 2 - 1; i++) {
+            score += s.charAt(i % n) == s.charAt((i - 1) % n) ? 1 : 0;
+            score -= s.charAt(i % n) == s.charAt((i + 1) % n) ? 1 : 0;
+            ans += score == k ? 1 : 0;
+        }
+
+        return ans;
+    }
+}
+```
+
+#### C++
+
+```cpp
+class Solution {
+public:
+    int countRotations(string s, int k) {
+        int n = s.size();
+        int score = 0;
+
+        for (int i = 0; i < n - 1; i++) {
+            score += s[i] == s[i + 1];
+        }
+
+        int ans = score == k;
+
+        for (int i = n; i < n * 2 - 1; i++) {
+            score += s[i % n] == s[(i - 1) % n];
+            score -= s[i % n] == s[(i + 1) % n];
+            ans += score == k;
+        }
+
+        return ans;
+    }
+};
+```
+
+#### Go
+
+```go
+func countRotations(s string, k int) int {
+	n := len(s)
+	score := 0
+
+	for i := 0; i < n-1; i++ {
+		if s[i] == s[i+1] {
+			score++
+		}
+	}
+
+	ans := 0
+	if score == k {
+		ans++
+	}
+
+	for i := n; i < n*2-1; i++ {
+		if s[i%n] == s[(i-1)%n] {
+			score++
+		}
+		if s[i%n] == s[(i+1)%n] {
+			score--
+		}
+		if score == k {
+			ans++
+		}
+	}
+
+	return ans
+}
+```
+
+#### TypeScript
+
+```ts
+function countRotations(s: string, k: number): number {
+    const n = s.length;
+    let score = 0;
+
+    for (let i = 0; i < n - 1; i++) {
+        score += s[i] === s[i + 1] ? 1 : 0;
+    }
+
+    let ans = score === k ? 1 : 0;
+
+    for (let i = n; i < n * 2 - 1; i++) {
+        score += s[i % n] === s[(i - 1) % n] ? 1 : 0;
+        score -= s[i % n] === s[(i + 1) % n] ? 1 : 0;
+        ans += score === k ? 1 : 0;
+    }
+
+    return ans;
+}
+```
+
+<!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- problem:end -->

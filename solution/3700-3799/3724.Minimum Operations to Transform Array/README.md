@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 中等
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3724.Minimum%20Operations%20to%20Transform%20Array/README.md
 rating: 1789
 source: 第 168 场双周赛 Q3
 tags:
@@ -208,6 +207,14 @@ tags:
 <!-- solution:start -->
 
 ### 方法一：贪心
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 前 $n$ 个位置必须改到 $\textit{nums2}$ 的对应值，代价是绝对差之和；最后一个值只能通过「追加」产生，至少再花 $1$ 次。若某对 $(\textit{nums1}[i],\textit{nums2}[i])$ 的区间已经覆盖 $\textit{nums2}[n]$，追加时不必改值；否则还要把某一端改到它，取最近距离。
+
+<!-- thinking:end -->
 
 我们定义一个答案变量 $\text{ans}$ 来记录最少操作次数，初始值为 $1$，表示将最后一个元素追加到数组末尾所需的操作次数。
 

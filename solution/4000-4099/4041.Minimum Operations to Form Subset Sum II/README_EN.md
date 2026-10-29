@@ -1,7 +1,11 @@
 ---
 comments: true
 difficulty: Hard
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4041.Minimum%20Operations%20to%20Form%20Subset%20Sum%20II/README_EN.md
+rating: 2099
+source: Weekly Contest 517 Q4
+tags:
+    - Array
+    - Dynamic Programming
 ---
 
 <!-- problem:start -->
@@ -93,6 +97,18 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4041.Mi
 <!-- solution:start -->
 
 ### Solution 1: 0-1 Knapsack
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> Unlike the previous problem, multiplies and divides may be interleaved. A multiply that happens before a divide cancels, so every sequence reduces to $i$ divides followed by $j$ multiplies: the value is $\lfloor x/2^i\rfloor\times 2^j$ at cost $i+j$.
+>
+> We still fill capacity $\textit{sum}$ with a $0$-$1$ knapsack, now enumerating an extra dimension per element. Backward updates keep at most one pair $(i,j)$ per element.
+>
+> If $f[\textit{sum}]$ stays infinite the answer is $-1$.
+
+<!-- thinking:end -->
 
 Unlike the previous problem, multiplications and divisions may be interleaved in any order. Notice that a multiplication immediately followed by a division is a no-op, since $\lfloor 2x / 2 \rfloor = x$, so any multiplication that happens before a division can be cancelled against it, wasting two operations. After repeatedly cancelling such pairs, every sequence reduces to "divide $i$ times, then multiply $j$ times", which turns $x$ into $\lfloor x / 2^i \rfloor \times 2^j$ at a cost of $i + j$ operations.
 

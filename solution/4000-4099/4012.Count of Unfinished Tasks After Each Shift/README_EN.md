@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4012.Count%20of%20Unfinished%20Tasks%20After%20Each%20Shift/README_EN.md
 rating: 1735
 source: Weekly Contest 513 Q3
 tags:
@@ -105,6 +104,18 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1: Prefix Sum + Binary Search
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> Shifts consume a cyclic task queue. Simulating each shift by walking tasks one by one would multiply $n$ by $m$.
+>
+> Prefix sums of task times are monotone, so the farthest task a leftover budget can finish can be found by binary search. Those prefix sums answer “how much time is needed to finish several whole tasks after the current one,” and each shift then updates the index and the partial time already spent on the current task.
+>
+> If the leftover time clears the rest of the queue, the pointer returns to the front and that shift ends with zero unfinished tasks.
+
+<!-- thinking:end -->
 
 We first precompute the prefix sum array $s$ of task times, where $s[i]$ represents the total time required for the first $i$ tasks.
 

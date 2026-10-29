@@ -1,7 +1,14 @@
 ---
 comments: true
 difficulty: 中等
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4032.Longest%20Subarray%20With%20at%20Most%20K%20Distinct%20Prime%20Factors/README.md
+rating: 1758
+source: 第 516 场周赛 Q3
+tags:
+    - 数组
+    - 哈希表
+    - 数学
+    - 数论
+    - 滑动窗口
 ---
 
 <!-- problem:start -->
@@ -100,6 +107,18 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4032.Lo
 <!-- solution:start -->
 
 ### 方法一：预处理 + 滑动窗口
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 子数组合法当且仅当其中不同质因子的个数不超过 $k$，这一约束对窗口具有单调性，适合滑动窗口。
+>
+> 每个数若在线分解质因子， $n$ 与 $M=10^5$ 相乘偏大。先用筛法预处理 $[2,M]$ 内每个数的质因子列表，窗口扩张或收缩时按列表更新哈希表中的出现次数。
+>
+> 每当不同质因子个数回到 $k$ 以内，用窗口长度更新答案。
+
+<!-- thinking:end -->
 
 我们先预处理出 $[2, 10^5]$ 内每个数的质因数列表，记录在 $\textit{primes}$ 中。具体地，枚举 $i = 2, 3, \cdots, M$，若 $\textit{primes}[i]$ 为空，说明 $i$ 是质数，则将 $i$ 加入所有 $i$ 的倍数的质因数列表中。
 
@@ -373,7 +392,7 @@ impl Solution {
                 l += 1;
             }
 
-            ans = ans.max((r - l + 1) as i32);
+            ans = ans.max(r as i32 - l as i32 + 1);
         }
 
         ans

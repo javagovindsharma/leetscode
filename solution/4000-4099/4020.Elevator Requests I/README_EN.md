@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Easy
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4020.Elevator%20Requests%20I/README_EN.md
 rating: 1187
 source: Biweekly Contest 189 Q1
 tags:
@@ -88,6 +87,18 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1: Simulation
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> The request order is fixed, so the elevator has no choice of permutation.
+>
+> Travel time between consecutive requests is the absolute floor difference; the first leg from floor $0$ is exactly $\textit{requests}[0]$.
+>
+> Summing those differences is the total time and needs only a linear scan.
+
+<!-- thinking:end -->
 
 The elevator starts at floor $0$ and serves requests in the given order. The travel time between two consecutive requests is the absolute difference of their floor numbers. The first request goes from floor $0$ to $\textit{requests}[0]$, which takes $\textit{requests}[0]$ seconds. Then we add the absolute differences of adjacent requests.
 

@@ -1,7 +1,12 @@
 ---
 comments: true
 difficulty: 简单
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4030.Check%20ASCII%20Palindromic/README.md
+rating: 1165
+source: 第 516 场周赛 Q1
+tags:
+    - 位运算
+    - 双指针
+    - 字符串
 ---
 
 <!-- problem:start -->
@@ -75,6 +80,16 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4030.Ch
 <!-- solution:start -->
 
 ### 方法一：模拟
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 每个字符固定编码成 $8$ 位二进制（含前导零），拼接后再判断回文。 $n$ 不大，不必在位级别上寻找关于字符对的等价条件。
+>
+> 按原顺序构造 $t$，再与 $t$ 的反串比较即可。
+
+<!-- thinking:end -->
 
 我们按照题意，将字符串 $s$ 中每个字符替换为其 ASCII 值的 $8$ 位二进制表示（包含前导零），按原顺序拼接得到二进制字符串 $t$，然后判断 $t$ 是否为回文串即可。
 

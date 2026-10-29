@@ -1,7 +1,11 @@
 ---
 comments: true
 difficulty: 中等
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4034.Minimum%20Bishop%20Moves%20to%20Reach%20Target/README.md
+rating: 1244
+source: 第 190 场双周赛 Q1
+tags:
+    - 数组
+    - 数学
 ---
 
 <!-- problem:start -->
@@ -31,7 +35,7 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4034.Mi
 
 <p><strong>解释：</strong></p>
 
-<p><img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/4000-4099/4034.Minimum%20Bishop%20Moves%20to%20Reach%20Target/images/image.png" style="width: 300px; height: 307px;" /></p>
+<p><strong><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/4000-4099/4034.Minimum%20Bishop%20Moves%20to%20Reach%20Target/images/111.png" style="width: 300px; height: 303px;" /></strong></p>
 
 <p>一步对角线移动即可将象直接从 <code>(8, 1)</code> 送达 <code>(1, 8)</code>。</p>
 </div>
@@ -45,7 +49,7 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4034.Mi
 
 <p><strong>解释：</strong></p>
 
-<p><img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/4000-4099/4034.Minimum%20Bishop%20Moves%20to%20Reach%20Target/images/screenshot-2026-07-23-at-23625am.png" style="width: 300px; height: 305px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/4000-4099/4034.Minimum%20Bishop%20Moves%20to%20Reach%20Target/images/22-ezgifcom-invert-colors.png" style="width: 300px; height: 305px;" /></p>
 
 <p>象从 <code>(4, 2)</code> 移动到 <code>(3, 1)</code>，然后再从 <code>(3, 1)</code> 移动到 <code>(1, 3)</code>，经过 2 步移动到达目标位置。</p>
 </div>
@@ -79,6 +83,18 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4034.Mi
 <!-- solution:start -->
 
 ### 方法一：分类讨论
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 象只能走对角线，一步使行、列同时增减相同数量，故 $(r+c)\bmod 2$ 不变。不同色的格子永远不可达，无需搜索。
+>
+> 同色时，若已在同一条对角线上则一步到达；否则在 $8\times 8$ 棋盘上任意两格同色格都存在中转格，两步即可。
+>
+> 分类讨论后答案只可能是 $-1$、 $1$ 或 $2$，时间为常数。
+
+<!-- thinking:end -->
 
 象每次只能沿着对角线移动，一次移动会使行、列同时增减相同的数量，因此 $(r + c) \bmod 2$ 始终保持不变，即象只能停留在与起点同色的格子上。若 $(sr + sc)$ 与 $(tr + tc)$ 奇偶性不同，象永远无法到达目标，返回 $-1$。
 

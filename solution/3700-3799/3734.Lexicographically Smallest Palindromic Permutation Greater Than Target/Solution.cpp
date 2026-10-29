@@ -1,113 +1,101 @@
-#include <string>
-#include <vector>
-#include <algorithm>
-
-using namespace std;
-
 class Solution {
 public:
-    string lexPalindromicPermutation(string s, string target) {
-        int n = s.length();
-        vector<int> counts(26, 0);
-        for (char c : s) counts[c - 'a']++;
-
-        // 1. Validate if a valid palindrome permutation is possible
-        int odd_count = 0;
-        char odd_char = 0;
-        for (int i = 0; i < 26; ++i) {
-            if (counts[i] % 2 != 0) {
-                odd_count++;
-                odd_char = 'a' + i;
-            }
+    string buildPalindrome(string left, char middle, int n) {
+        string right = left;
+        reverse(right.begin(), right.end());
+        if (n % 2 == 1) {
+            return left + string(1, middle) + right;
         }
-        if (odd_count > 1) return "";
-
-        // 2. Extract half of the available characters for prefix building
-        vector<int> half_counts(26, 0);
-        for (int i = 0; i < 26; ++i) {
-            half_counts[i] = counts[i] / 2;
-        }
-
-        int half_len = n / 2; // Notice: left half length is strictly n/2
-        string prefix = "";
-        string result = "";
-
-        // 3. Backtracking to build the optimal prefix
-        if (backtrack(0, half_len, n, half_counts, odd_char, target, prefix, result)) {
-            return result;
-        }
-        return "";
+        return left + right;
     }
 
-private:
-    bool backtrack(int idx, int half_len, int n, vector<int>& half_counts, 
-                   char odd_char, const string& target, string& prefix, string& result) {
-        if (idx == half_len) {
-            // Construct the full palindrome based on the prefix built so far
-            string full = prefix;
-            if (n % 2 != 0) {
-                full += odd_char;
-            }
-            string rev = prefix;
-            reverse(rev.begin(), rev.end());
-            full += rev;
-
-            // Check if it strictly beats the target
-            if (full > target) {
-                result = full;
-                return true;
-            }
-            return false;
+    string lexPalindromicPermutation(string s, string target) {
+        int n = s.size();
+        vector<int> freq(26, 0);
+        for (char c : s) {
+            freq[c - 'a']++;
         }
 
-        // Option A: Try to match the target's character to maintain target boundary
-        int target_char_idx = target[idx] - 'a';
-        if (half_counts[target_char_idx] > 0) {
-            half_counts[target_char_idx]--;
-            prefix.push_back(target[idx]);
-            
-            if (backtrack(idx + 1, half_len, n, half_counts, odd_char, target, prefix, result)) {
-                return true;
+        int oddCount = 0;
+        char middle = 0;
+        for (int i = 0; i < 26; i++) {
+            if (freq[i] % 2 == 1) {
+                oddCount++;
+                middle = char('a' + i);
             }
-            
-            // Backtrack
-            prefix.pop_back();
-            half_counts[target_char_idx]++;
+        }
+        if (oddCount > 1) {
+            return "";
         }
 
-        // Option B: Choose a strictly greater character, allowing us to fill greedily
-        for (int i = target_char_idx + 1; i < 26; ++i) {
-            if (half_counts[i] > 0) {
-                half_counts[i]--;
-                prefix.push_back('a' + i);
+        vector<int> halfFreq(26, 0);
+        for (int i = 0; i < 26; i++) {
+            halfFreq[i] = freq[i] / 2;
+        }
 
-                // Greedily append the remaining characters from smallest to largest
-                string greedy_prefix = prefix;
-                vector<int> temp_counts = half_counts;
-                for (int j = 0; j < 26; ++j) {
-                    while (temp_counts[j] > 0) {
-                        greedy_prefix.push_back('a' + j);
-                        temp_counts[j]--;
+        int halfLen = n / 2;
+        string targetHalf = target.substr(0, halfLen);
+        vector<int> remaining = halfFreq;
+        string prefix = "";
+        int matched = 0;
+        for (int i = 0; i < halfLen; i++) {
+            int x = targetHalf[i] - 'a';
+            if (remaining[x] == 0) {
+                break;
+            }
+            prefix += targetHalf[i];
+            remaining[x]--;
+            matched++;
+        }
+
+        if (matched == halfLen) {
+            string candidate = buildPalindrome(prefix, middle, n);
+            if (candidate > target) {
+                return candidate;
+            }
+        }
+
+        int lastPosition = matched == halfLen ? halfLen - 1 : matched;
+        for (int pos = lastPosition; pos >= 0; pos--) {
+            vector<int> rem = halfFreq;
+            bool validPrefix = true;
+            for (int i = 0; i < pos; i++) {
+                int x = targetHalf[i] - 'a';
+                if (rem[x] == 0) {
+                    validPrefix = false;
+                    break;
+                }
+                rem[x]--;
+            }
+            if (!validPrefix) {
+                continue;
+            }
+
+            int targetChar = targetHalf[pos] - 'a';
+            for (int c = targetChar + 1; c < 26; c++) {
+                if (rem[c] == 0) {
+                    continue;
+                }
+                string left = targetHalf.substr(0, pos);
+                left += char('a' + c);
+                rem[c]--;
+                for (int x = 0; x < 26; x++) {
+                    while (rem[x] > 0) {
+                        left += char('a' + x);
+                        rem[x]--;
                     }
                 }
-
-                // Complete the string configuration
-                if (n % 2 != 0) {
-                    greedy_prefix.push_back(odd_char);
+                string candidate = buildPalindrome(left, middle, n);
+                if (candidate > target) {
+                    return candidate;
                 }
-                string rev = greedy_prefix.substr(0, half_len);
-                reverse(rev.begin(), rev.end());
-                greedy_prefix += rev;
-
-                result = greedy_prefix;
-                
-                // Roll back changes before returning success
-                prefix.pop_back();
-                half_counts[i]++;
-                return true;
+                rem = halfFreq;
+                for (int i = 0; i < pos; i++) {
+                    rem[targetHalf[i] - 'a']--;
+                }
             }
         }
 
-        return false;
+        return "";
     }
 };

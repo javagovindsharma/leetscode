@@ -1,7 +1,11 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3733.Minimum%20Time%20to%20Complete%20All%20Deliveries/README_EN.md
+rating: 1972
+source: Weekly Contest 474 Q3
+tags:
+    - Math
+    - Binary Search
 ---
 
 <!-- problem:start -->
@@ -87,6 +91,14 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3733.Mi
 <!-- solution:start -->
 
 ### Solution 1
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> Only one drone may deliver in a given hour, and drone $i$ must charge at multiples of $r_i$. The feasible time grows with the demand, so we binary-search the total hours $t$. Drone $i$ has $t-\lfloor t/r_i\rfloor$ free hours; we check that the two supplies cover $d_1+d_2$ and each covers its own $d_i$.
+
+<!-- thinking:end -->
 
 <!-- tabs:start -->
 

@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 困难
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3710.Maximum%20Partition%20Factor/README.md
 rating: 2135
 source: 第 167 场双周赛 Q4
 tags:
@@ -99,6 +98,14 @@ tags:
 <!-- solution:start -->
 
 ### 方法一
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 划分因子是组内最小曼哈顿距离，目标是最大化该值，适合对答案二分。阈值定为 $d$ 时，距离小于 $d$ 的两点不能同组，于是在「边权小于 $d$」的图上检验是否二分即可。点数不大时，建图与染色都能承受。
+
+<!-- thinking:end -->
 
 <!-- tabs:start -->
 

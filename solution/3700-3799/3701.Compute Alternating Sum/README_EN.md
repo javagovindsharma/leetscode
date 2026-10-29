@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Easy
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3701.Compute%20Alternating%20Sum/README_EN.md
 rating: 1228
 source: Weekly Contest 470 Q1
 tags:
@@ -73,6 +72,14 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1: Simulation
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> The array has length at most $100$, so evaluating the definition in one pass is enough. The alternating sum is the sum of even-indexed entries minus the sum of odd-indexed ones, which the two slices compute directly.
+
+<!-- thinking:end -->
 
 We can directly traverse the array $\textit{nums}$. For each index $i$, if $i$ is even, we add $\textit{nums}[i]$ to the answer; otherwise, we subtract $\textit{nums}[i]$ from the answer.
 

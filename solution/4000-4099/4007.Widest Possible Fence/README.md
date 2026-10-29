@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 困难
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4007.Widest%20Possible%20Fence/README.md
 rating: 1908
 source: 第 188 场双周赛 Q2
 tags:
@@ -85,6 +84,18 @@ tags:
 
 ### 方法一：计数 + 枚举
 
+<!-- thinking:start -->
+
+> **思考**
+>
+> 同一行栅栏必须等高，木板可以单根使用、两根同高叠放，或两根不同高叠放。若按木板逐根搜索组合，方案数随 $n$ 增长过快。
+>
+> 高度先计数后，每一种目标行高只来自「高度 $h$ 本身」「两根 $h/2$」或「一对 $x+y=h$」。同一根木板不会同时进入两种配对，故可按高度对直接累加列数。
+>
+> $n\le 1000$，枚举所有有序高度对是 $O(m^2)$，取这些列数的最大值即可。
+
+<!-- thinking:end -->
+
 我们先用哈希表 $\textit{cnt}$ 统计每种高度木板的数量。
 
 对于目标高度 $h$，能够得到的高度为 $h$ 的木板数量由三部分组成：
@@ -99,11 +110,11 @@ tags:
 
 - $t[x] \mathrel{+}= \textit{cnt}[x]$，表示直接使用高度为 $x$ 的木板；
 - $t[2x] \mathrel{+}= \lfloor \textit{cnt}[x] / 2 \rfloor$，表示两块高度为 $x$ 的木板两两组合；
-- 对于每种高度 $y > x$，$t[x + y] \mathrel{+}= \min(\textit{cnt}[x], \textit{cnt}[y])$，表示高度 $x$ 与高度 $y$ 的木板组合。
+- 对于每种高度 $y > x$， $t[x + y] \mathrel{+}= \min(\textit{cnt}[x], \textit{cnt}[y])$，表示高度 $x$ 与高度 $y$ 的木板组合。
 
 答案即为 $t$ 中的最大值。
 
-时间复杂度 $O(n + m^2)$，空间复杂度 $O(m)$。其中 $n$ 为木板数量，$m$ 为不同高度的数量，$m \leq n$。
+时间复杂度 $O(n + m^2)$，空间复杂度 $O(m)$。其中 $n$ 为木板数量， $m$ 为不同高度的数量， $m \leq n$。
 
 <!-- tabs:start -->
 

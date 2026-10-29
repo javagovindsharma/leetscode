@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3723.Maximize%20Sum%20of%20Squares%20of%20Digits/README_EN.md
 rating: 1536
 source: Biweekly Contest 168 Q2
 tags:
@@ -100,6 +99,14 @@ tags:
 
 ### Solution 1: Greedy
 
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> Enumerating every $\text{num}$-digit integer whose digits sum to $\text{sum}$ and then comparing scores cannot finish when $\text{num}$ reaches $2\times 10^5$. The candidate set grows exponentially with the length, and the score still depends on how the digits are spread out, so the comparison itself is the bottleneck. Squaring is convex on the non-negative integers, so a fixed sum produces a larger sum of squares when the digits are concentrated; the optimal multiset is therefore as many $9$s as possible plus at most one remainder. Writing those larger digits from the high end leaves the score unchanged and selects the numerically largest integer among ties, which is why the answer is assembled directly in that order.
+
+<!-- thinking:end -->
+
 If $\text{num} \times 9 < \text{sum}$, then there is no valid good integer, so we return an empty string.
 
 Otherwise, we can use as many digits $9$ as possible to form the good integer, since $9^2$ is the largest and will maximize the score. Specifically, we calculate how many $9$s are contained in $\text{sum}$, denoted as $k$, and the remaining part $s = \text{sum} - 9 \times k$. Then, we construct the good integer with the first $k$ digits as $9$. If $s > 0$, we append a digit $s$ at the end, and finally pad with $0$s to reach a total of $\text{num}$ digits.
@@ -118,7 +125,7 @@ class Solution:
         k, s = divmod(sum, 9)
         ans = "9" * k
         if s:
-            ans += digits[s]
+            ans += str(s)
         ans += "0" * (num - len(ans))
         return ans
 ```
@@ -205,6 +212,74 @@ function maxSumOfSquares(num: number, sum: number): string {
 
     return ans;
 }
+```
+
+#### Rust
+
+```rust
+impl Solution {
+    pub fn max_sum_of_squares(num: i32, sum: i32) -> String {
+        if num * 9 < sum {
+            return String::new();
+        }
+        let k = sum / 9;
+        let s = sum % 9;
+        let mut ans = "9".repeat(k as usize);
+        if s > 0 {
+            ans.push((b'0' + s as u8) as char);
+        }
+        if ans.len() < num as usize {
+            ans.push_str(&"0".repeat(num as usize - ans.len()));
+        }
+        ans
+    }
+}
+```
+
+#### C#
+
+```cs
+public class Solution {
+    public string MaxSumOfSquares(int num, int sum) {
+        if (num * 9 < sum) {
+            return "";
+        }
+        int k = sum / 9;
+        int s = sum % 9;
+        var ans = new StringBuilder(num);
+        ans.Append('9', k);
+        if (s > 0) {
+            ans.Append(s);
+        }
+        ans.Append('0', num - ans.Length);
+        return ans.ToString();
+    }
+}
+```
+
+#### JavaScript
+
+```js
+/**
+ * @param {number} num
+ * @param {number} sum
+ * @return {string}
+ */
+var maxSumOfSquares = function (num, sum) {
+    if (num * 9 < sum) {
+        return '';
+    }
+    const k = Math.floor(sum / 9);
+    const s = sum % 9;
+    let ans = '9'.repeat(k);
+    if (s > 0) {
+        ans += String.fromCharCode('0'.charCodeAt(0) + s);
+    }
+    if (ans.length < num) {
+        ans += '0'.repeat(num - ans.length);
+    }
+    return ans;
+};
 ```
 
 <!-- tabs:end -->

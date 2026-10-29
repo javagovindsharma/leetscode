@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 简单
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4006.Count%20Valid%20Prefixes/README.md
 rating: 1242
 source: 第 188 场双周赛 Q1
 tags:
@@ -83,6 +82,18 @@ tags:
 <!-- solution:start -->
 
 ### 方法一：计数
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 前缀合法当且仅当其中 `'0'` 与 `'1'` 的个数之差的绝对值不超过 $1$。若对每个前缀单独再数一遍两种字符，总时间是平方级的。
+>
+> 差可以用一个变量 $t$ 从左到右维护：遇 `'1'` 加一，遇 `'0'` 减一。扫到每个位置时检验 $|t|\le 1$ 即可。
+>
+> 整段统计只需线性扫描，不必保存每个前缀的计数数组。
+
+<!-- thinking:end -->
 
 一个字符串能够重新排列成交替字符串，当且仅当其中 `'0'` 和 `'1'` 的数量之差不超过 $1$。
 

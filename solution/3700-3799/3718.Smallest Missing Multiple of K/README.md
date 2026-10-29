@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 简单
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3718.Smallest%20Missing%20Multiple%20of%20K/README.md
 rating: 1227
 source: 第 472 场周赛 Q1
 tags:
@@ -66,6 +65,14 @@ tags:
 <!-- solution:start -->
 
 ### 方法一：哈希表 + 枚举
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 所求是最小的正倍数 $k,2k,\ldots$ 中未出现者。 $n$ 与 $k$ 都不超过 $100$，先把数组放入集合，再从小到大枚举倍数即可。
+
+<!-- thinking:end -->
 
 我们先用一个哈希表 $\textit{s}$ 存储数组 $\textit{nums}$ 中出现的数字。然后从 $k$ 的第一个正倍数 $k \times 1$ 开始，依次枚举每个正倍数，直到找到第一个不在哈希表 $\textit{s}$ 中出现的倍数，即为答案。
 

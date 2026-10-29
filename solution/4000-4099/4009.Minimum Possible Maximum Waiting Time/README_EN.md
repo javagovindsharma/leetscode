@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Hard
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4009.Minimum%20Possible%20Maximum%20Waiting%20Time/README_EN.md
 rating: 2498
 source: Biweekly Contest 188 Q4
 tags:
@@ -160,6 +159,18 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> Cars are released in index order and only two pumps have limited fuel. Assigning each car to a pump is a $2^n$ search, which $n\le 50$ forbids.
+>
+> We first maximize the served prefix, then minimize the maximum waiting time among those assignments. The state must therefore keep both pumps' remaining fuel and their next free times.
+>
+> Demands are at most $20$ and capacities at most $50$, so the fuel dimensions stay small enough for memoized search over the served prefix and the two pump states.
+
+<!-- thinking:end -->
 
 <!-- tabs:start -->
 

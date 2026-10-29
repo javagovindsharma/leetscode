@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4019.Merge%20Close%20Characters%20II/README_EN.md
 tags:
     - Hash Table
     - String
@@ -97,6 +96,18 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1: Hash Table
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> A merge always deletes the right-hand character, so the result is a left-to-right subsequence in which two equal letters are more than $k$ positions apart. Repeatedly scanning and merging may delete only one character per pass.
+>
+> While scanning left to right, if the current letter lies at most $k$ positions from its last kept occurrence, some later merge would delete it; otherwise it should be kept.
+>
+> A hash table stores the last index of each letter in the answer, and one pass under that rule produces the final string.
+
+<!-- thinking:end -->
 
 We use a hash table $\textit{last}$ to record the last occurrence position of each character in the answer string. We iterate over each character in $s$ from left to right. Let $\textit{cur}$ be the current length of the answer. If the character has appeared before and the difference between $\textit{cur}$ and its last occurrence is at most $k$, we skip it; otherwise, we append the character to the answer and update its position in the hash table.
 

@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Hard
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3715.Sum%20of%20Perfect%20Square%20Ancestors/README_EN.md
 rating: 2235
 source: Weekly Contest 471 Q4
 tags:
@@ -188,6 +187,14 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> $n\le 10^5$ forbids walking to the root from every node. The product $nums[i]\cdot nums[anc]$ is a square iff the two values share the same square-free kernel. A DFS maintains a frequency map of kernels on the root-to-node path, adding on entry and rolling back on exit.
+
+<!-- thinking:end -->
 
 <!-- tabs:start -->
 

@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4022.K-th%20Digit%20in%20Infinite%20String/README_EN.md
 rating: 1914
 source: Biweekly Contest 189 Q3
 tags:
@@ -85,6 +84,18 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1: Mathematics
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> $k$ can be huge, so we cannot materialise the infinite string. Numbers are grouped by digit length, and each group's length has a closed form, so we subtract whole groups of short lengths until $k$ falls into one length and one block.
+>
+> Block $b$ holds ten $d$-digit integers, increasing on even $b$ and decreasing on odd $b$. The offset inside the block recovers the integer, and we read the requested digit.
+>
+> The whole location uses only division and remainders of $k$, in $O(\log k)$ time.
+
+<!-- thinking:end -->
 
 The infinite string is formed by concatenating blocks: block $b$ contains the positive integers from $10b$ to $10b+9$ (block $0$ starts from $1$). Even blocks are appended in increasing order, and odd blocks in decreasing order.
 

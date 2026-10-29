@@ -1,7 +1,13 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4035.Maximum%20Valid%20Split%20Positions%20I/README_EN.md
+rating: 1663
+source: Biweekly Contest 190 Q2
+tags:
+    - Array
+    - Math
+    - Enumeration
+    - Number Theory
 ---
 
 <!-- problem:start -->
@@ -152,6 +158,18 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4035.Ma
 <!-- solution:start -->
 
 ### Solution 1: Enumerate the Removed Index + Prefix and Suffix GCD
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> Split $i$ is valid if and only if the prefix GCD on the left equals the suffix GCD on the right. For $n\le 1000$ we need not analyse how a deletion perturbs the GCD chain.
+>
+> Enumerate the deleted index (and the case of deleting nothing), build prefix and suffix GCDs of the remaining array, count equal splits, and keep the maximum.
+>
+> One scoring pass is $O(n\log M)$, so the total $O(n^2\log M)$ time is acceptable.
+
+<!-- thinking:end -->
 
 Since the array length satisfies $n \leq 1000$, we can enumerate the index of the removed element (including the case where nothing is removed) to obtain the array $\textit{arr}$, compute the score of $\textit{arr}$, and take the maximum over all cases.
 

@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 简单
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4000.Largest%20Integer%20With%20Given%20Digit%20Sum/README.md
 rating: 1199
 source: 第 512 场周赛 Q1
 tags:
@@ -84,6 +83,18 @@ tags:
 <!-- solution:start -->
 
 ### 方法一：贪心
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 要得到 $n$ 位且数位和为 $s$ 的整数，若枚举所有满足和约束的数再取最大，在 $n\le 5$ 时也能算完，只是完全没有必要。
+>
+> 数位和固定时，整数的大小由高位决定：高位每增大 $1$，对数值的贡献都大于任何低位调整。因此从高位到低位依次放入当前还能使用的最大数字 $\min(s,9)$，把余量留给更低的数位。
+>
+> 若 $n\times 9<s$，则即使每一位都取 $9$ 仍凑不足 $s$，直接返回 $-1$。
+
+<!-- thinking:end -->
 
 若 $n \times 9 < s$，即使每一位都取 $9$ 也无法凑出数位和 $s$，返回 $-1$。
 

@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4011.Count%20Subarrays%20With%20Even%20Odd%20Ratio%20I/README_EN.md
 rating: 1391
 source: Weekly Contest 513 Q2
 tags:
@@ -194,6 +193,18 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1: Enumerate Subarrays
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> For $n\le 1000$ there are $O(n^2)$ subarrays, so enumerating both endpoints is acceptable.
+>
+> With the left end fixed we extend the right end, counting odd entries $y$; the even count is the length minus $y$. The test $\frac{x}{y}\le\frac{a}{b}$ is meaningful only for $y>0$, matching the floating-point comparison in the code, and subarrays with $y=0$ are skipped.
+>
+> Prefix sums and Fenwick trees are unnecessary; the double loop already counts every valid subarray.
+
+<!-- thinking:end -->
 
 We enumerate the left endpoint $i$ of the subarray, then extend the right endpoint $j$ to the right while maintaining the count of odd numbers $y$ in the subarray. The count of even numbers is then $x = j - i + 1 - y$.
 

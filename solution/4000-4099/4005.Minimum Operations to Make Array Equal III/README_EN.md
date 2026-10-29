@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Hard
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4005.Minimum%20Operations%20to%20Make%20Array%20Equal%20III/README_EN.md
 tags:
     - Array
     - Hash Table
@@ -94,6 +93,18 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> With $n$ up to $10^5$ and values up to $10^9$, we cannot simulate multiplications and divisions on every pair, nor test every reachable integer as a common target.
+>
+> A single multiply or exact divide jumps a number to any multiple or proper divisor, so the cost of meeting at one target is governed by common factors and the extra factors each value must add or strip—not by the number of intermediate integers.
+>
+> We therefore compress each number by its factorization and accumulate the minimum operations over a candidate set far smaller than $10^9$.
+
+<!-- thinking:end -->
 
 <!-- tabs:start -->
 

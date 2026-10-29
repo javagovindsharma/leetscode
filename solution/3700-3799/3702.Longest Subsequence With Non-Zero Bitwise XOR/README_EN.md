@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3702.Longest%20Subsequence%20With%20Non-Zero%20Bitwise%20XOR/README_EN.md
 rating: 1489
 source: Weekly Contest 470 Q2
 tags:
@@ -63,6 +62,14 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1: Brain Teaser
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> $n\le 10^5$ rules out enumerating subsequences. The XOR of a subsequence is the XOR of the whole array after deleting some elements. If the total XOR is already nonzero, the full array is optimal. If every element is $0$, no nonzero XOR exists. Otherwise the total XOR is $0$ but a nonzero value remains, so deleting one nonzero element makes the XOR nonzero. A single scan of the total XOR and the zero count decides the three cases.
+
+<!-- thinking:end -->
 
 If the bitwise XOR of all elements in the array is non-zero, then the entire array is the desired longest subsequence, with length equal to the array length.
 

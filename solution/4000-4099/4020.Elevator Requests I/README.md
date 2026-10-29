@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 简单
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4020.Elevator%20Requests%20I/README.md
 rating: 1187
 source: 第 189 场双周赛 Q1
 tags:
@@ -90,6 +89,18 @@ tags:
 <!-- solution:start -->
 
 ### 方法一：模拟
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 请求顺序已经给定，电梯必须按该顺序移动，没有改序的余地。
+>
+> 相邻两次请求之间的耗时即楼层差的绝对值；从 $0$ 层出发的第一段恰为 $\textit{requests}[0]$。
+>
+> 把这些差值累加即为总时间，线性扫描即可。
+
+<!-- thinking:end -->
 
 电梯从 $0$ 层出发，按给定顺序处理请求。相邻两次请求之间的移动时间为两层楼层编号之差的绝对值。第一个请求从 $0$ 层到 $\textit{requests}[0]$，耗时即为 $\textit{requests}[0]$；之后将相邻请求的楼层差绝对值累加即可。
 

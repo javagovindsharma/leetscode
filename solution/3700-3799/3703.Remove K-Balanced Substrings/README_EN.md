@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3703.Remove%20K-Balanced%20Substrings/README_EN.md
 rating: 1802
 source: Weekly Contest 470 Q3
 tags:
@@ -165,13 +164,21 @@ tags:
 
 ### Solution 1: Stack
 
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> Repeatedly searching for and deleting $k$-balanced runs would rescan the same region many times. Consecutive equal characters can be compressed, so the stack stores only a character and its count. Whenever the top holds exactly $k$ closing parentheses and the run beneath it has at least $k$ opening ones, we cancel them immediately, so cascading deletions finish in one pass.
+
+<!-- thinking:end -->
+
 We use a stack to maintain the current state of the string. Each element in the stack is a pair representing a character and its consecutive count.
 
 Traverse each character in the string:
 
--   If the stack is not empty and the character of the top element matches the current character, increment the count of the top element.
--   Otherwise, push the current character with count 1 as a new element onto the stack.
--   If the current character is `')'`, and there are at least two elements in the stack, and the count of the top element equals $k$, and the count of the previous element is greater than or equal to $k$, then pop the top element and subtract $k$ from the count of the previous element. If the count of the previous element becomes 0, pop it as well.
+- If the stack is not empty and the character of the top element matches the current character, increment the count of the top element.
+- Otherwise, push the current character with count 1 as a new element onto the stack.
+- If the current character is `')'`, and there are at least two elements in the stack, and the count of the top element equals $k$, and the count of the previous element is greater than or equal to $k$, then pop the top element and subtract $k$ from the count of the previous element. If the count of the previous element becomes 0, pop it as well.
 
 After traversal, the remaining elements in the stack represent the final state of the string. We concatenate these elements in order to get the result string.
 

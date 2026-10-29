@@ -1,7 +1,15 @@
 ---
 comments: true
 difficulty: Hard
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4033.Valid%20K-Unique%20Subarrays%20I/README_EN.md
+rating: 2314
+source: Weekly Contest 516 Q4
+tags:
+    - Bit Manipulation
+    - Binary Indexed Tree
+    - Segment Tree
+    - Array
+    - Prefix Sum
+    - Hash Function
 ---
 
 <!-- problem:start -->
@@ -137,6 +145,18 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4033.Va
 <!-- solution:start -->
 
 ### Solution 1
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> Each query asks whether a subarray has exactly $k$ distinct values and even frequencies. Both $n$ and the number of queries are $10^5$, so we cannot scan every range.
+>
+> All-even frequencies mean every value appears an even number of times, which a prefix XOR-hash tests in $O(1)$; the distinct-count constraint needs a second prefix or counter structure.
+>
+> Combined, each query can be answered in logarithmic or near-constant time.
+
+<!-- thinking:end -->
 
 <!-- tabs:start -->
 

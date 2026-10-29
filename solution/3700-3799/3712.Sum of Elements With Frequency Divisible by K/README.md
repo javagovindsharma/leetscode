@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 简单
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3712.Sum%20of%20Elements%20With%20Frequency%20Divisible%20by%20K/README.md
 rating: 1198
 source: 第 471 场周赛 Q1
 tags:
@@ -97,6 +96,14 @@ tags:
 <!-- solution:start -->
 
 ### 方法一：计数
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 判定只看每个值的出现次数是否被 $k$ 整除，与位置无关。 $n\le 100$，先计数再筛即可；满足条件的值按其出现次数计入总和。
+
+<!-- thinking:end -->
 
 我们用一个哈希表 $\textit{cnt}$ 来记录每个数字的出现次数。遍历数组 $\textit{nums}$，对于每个数字 $x$，我们将 $\textit{cnt}[x]$ 增加 $1$。
 

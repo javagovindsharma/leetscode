@@ -1,7 +1,13 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3732.Maximum%20Product%20of%20Three%20Elements%20After%20One%20Replacement/README_EN.md
+rating: 1529
+source: Weekly Contest 474 Q2
+tags:
+    - Greedy
+    - Array
+    - Math
+    - Sorting
 ---
 
 <!-- problem:start -->
@@ -79,6 +85,14 @@ The maximum product is 1200000.</div>
 <!-- solution:start -->
 
 ### Solution 1: Sorting
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> Exactly one entry may be replaced by any integer in $[-10^5,10^5]$. The best product is one of: the two smallest values times $10^5$, the two largest times $10^5$, or the smallest times the largest times $-10^5$. Sorting exposes those four endpoints.
+
+<!-- thinking:end -->
 
 According to the problem description, we can replace one element in the array with any integer in the range $[-10^5, 10^5]$. To maximize the product of three elements, we can consider the following cases:
 

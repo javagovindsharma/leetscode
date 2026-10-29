@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 中等
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4011.Count%20Subarrays%20With%20Even%20Odd%20Ratio%20I/README.md
 rating: 1391
 source: 第 513 场周赛 Q2
 tags:
@@ -199,6 +198,18 @@ tags:
 <!-- solution:start -->
 
 ### 方法一：枚举子数组
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> $n\le 1000$，子数组个数为 $O(n^2)$，枚举左右端点可以承受。
+>
+> 固定左端再向右扩展时，用一个计数器维护奇数个数 $y$，偶数个数即为长度减 $y$。条件 $\frac{x}{y}\le\frac{a}{b}$ 只在 $y>0$ 时有意义，与代码中的实数比较一致； $y=0$ 的子数组直接跳过。
+>
+> 无需前缀和或树状数组，双重循环即可统计。
+
+<!-- thinking:end -->
 
 我们枚举子数组的左端点 $i$，然后向右扩展右端点 $j$，同时维护子数组中奇数的个数 $y$，那么偶数的个数为 $x = j - i + 1 - y$。
 

@@ -1,7 +1,12 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4039.Sum%20of%20Decoded%20Numbers/README_EN.md
+rating: 1463
+source: Weekly Contest 517 Q2
+tags:
+    - Array
+    - Math
+    - Simulation
 ---
 
 <!-- problem:start -->
@@ -103,6 +108,16 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4039.Su
 <!-- solution:start -->
 
 ### Solution 1: Simulation + Fast Power
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> Each element decodes independently: the width is the last digit, the remaining digits split into $x$ and $y$, and we compute $x^y$. Elements do not share state.
+>
+> $y$ can reach $10^9$, so multiplying in a loop is impossible. Fast exponentiation yields $x^y\bmod(10^9+7)$ in $O(\log y)$, and we add the results modulo the same prime.
+
+<!-- thinking:end -->
 
 We decode each element exactly as the statement describes. For each element $v$ in $\textit{nums}$, its width is $w = v \bmod 10$, and the number left after dropping the last digit is $d = \lfloor v / 10 \rfloor$. Converting $d$ to its decimal string $s$, the value $x$ is the integer formed by the first $w$ characters of $s$, and $y$ is the integer formed by the remaining characters.
 

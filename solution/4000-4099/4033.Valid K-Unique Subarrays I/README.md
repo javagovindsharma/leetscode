@@ -1,7 +1,15 @@
 ---
 comments: true
 difficulty: 困难
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4033.Valid%20K-Unique%20Subarrays%20I/README.md
+rating: 2314
+source: 第 516 场周赛 Q4
+tags:
+    - 位运算
+    - 树状数组
+    - 线段树
+    - 数组
+    - 前缀和
+    - 哈希函数
 ---
 
 <!-- problem:start -->
@@ -139,6 +147,18 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4033.Va
 <!-- solution:start -->
 
 ### 方法一
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 询问子数组是否恰好含 $k$ 个不同值且每个值出现偶数次， $n$ 与询问均为 $10^5$，不能每次再扫一遍区间。
+>
+> 频次全为偶数等价于区间内每个值的出现次数模 $2$ 为 $0$，可用前缀异或哈希在 $O(1)$ 判断；不同值个数则需要另一套前缀或分块信息。
+>
+> 两者结合后，每个询问可以在对数或接近常数的时间内回答。
+
+<!-- thinking:end -->
 
 <!-- tabs:start -->
 

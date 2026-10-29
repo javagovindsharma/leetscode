@@ -1,7 +1,14 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4032.Longest%20Subarray%20With%20at%20Most%20K%20Distinct%20Prime%20Factors/README_EN.md
+rating: 1758
+source: Weekly Contest 516 Q3
+tags:
+    - Array
+    - Hash Table
+    - Math
+    - Number Theory
+    - Sliding Window
 ---
 
 <!-- problem:start -->
@@ -94,6 +101,18 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4032.Lo
 <!-- solution:start -->
 
 ### Solution 1: Preprocessing + Sliding Window
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> A subarray is legal if and only if it has at most $k$ distinct prime factors. That constraint is monotone in the window, so a sliding window applies.
+>
+> Factoring every value online would multiply $n$ by $M=10^5$. A sieve stores the prime-factor lists on $[2,M]$; the window updates a hash table from those lists as it expands or shrinks.
+>
+> Whenever the number of distinct primes is again at most $k$, the window length updates the answer.
+
+<!-- thinking:end -->
 
 First, we preprocess the list of prime factors for every number in $[2, 10^5]$ and store them in $\textit{primes}$. Specifically, we enumerate $i = 2, 3, \cdots, M$. If $\textit{primes}[i]$ is empty, then $i$ is a prime, and we add $i$ to the prime-factor list of every multiple of $i$.
 
@@ -367,7 +386,7 @@ impl Solution {
                 l += 1;
             }
 
-            ans = ans.max((r - l + 1) as i32);
+            ans = ans.max(r as i32 - l as i32 + 1);
         }
 
         ans

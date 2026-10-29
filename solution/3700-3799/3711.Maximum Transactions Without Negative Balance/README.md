@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 中等
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3711.Maximum%20Transactions%20Without%20Negative%20Balance/README.md
 tags:
     - 贪心
     - 数组
@@ -83,6 +82,14 @@ tags:
 <!-- solution:start -->
 
 ### 方法一：贪心 + 有序集合
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 必须按给定顺序处理，但可以跳过； $n\le 10^5$ 不允许回溯。贪心尽量执行每一笔，余额一旦为负，便从已选交易中丢掉金额最小的一笔（对余额伤害最大），有序集合支持 $O(\log n)$ 删除最小值。
+
+<!-- thinking:end -->
 
 我们使用一个有序集合（如 C++ 的 multiset，Java 的 TreeMap，Python 的 SortedList）来存储已经选择的交易金额，并维护一个变量 $s$ 来记录当前的余额。初始时 $s=0$，答案 $\textit{ans}$ 初始化为交易次数。
 

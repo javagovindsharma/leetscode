@@ -1,7 +1,11 @@
 ---
 comments: true
 difficulty: 中等
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3733.Minimum%20Time%20to%20Complete%20All%20Deliveries/README.md
+rating: 1972
+source: 第 474 场周赛 Q3
+tags:
+    - 数学
+    - 二分查找
 ---
 
 <!-- problem:start -->
@@ -90,6 +94,14 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3733.Mi
 <!-- solution:start -->
 
 ### 方法一
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 每小时只能有一架无人机送货，且各自在 $r_i$ 的倍数小时必须充电，时间上界随送货量增大。对总时间二分：第 $i$ 架在时刻 $t$ 内可用小时数为 $t-\lfloor t/r_i\rfloor$，再检查两架可用小时之和是否不少于 $d_1+d_2$，且各自不少于 $d_i$。
+
+<!-- thinking:end -->
 
 <!-- tabs:start -->
 

@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 中等
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3730.Maximum%20Calories%20Burnt%20from%20Jumps/README.md
 tags:
     - 贪心
     - 数组
@@ -109,6 +108,14 @@ tags:
 <!-- solution:start -->
 
 ### 方法一：贪心 + 排序
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 消耗是相邻高度差的平方，从 $0$ 起跳且不能返回地面。差的平方对两端极值更敏感，排序后在最高与最低之间交替跳跃，可使每一步的落差尽量大。
+
+<!-- thinking:end -->
 
 根据题意，跳跃的顺序会影响总消耗的卡路里数。为了最大化卡路里消耗，我们可以采用贪心策略，优先跳跃高度差较大的块。
 

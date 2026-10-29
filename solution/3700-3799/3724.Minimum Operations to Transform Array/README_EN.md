@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3724.Minimum%20Operations%20to%20Transform%20Array/README_EN.md
 rating: 1789
 source: Biweekly Contest 168 Q3
 tags:
@@ -205,6 +204,14 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1: Greedy
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> The first $n$ positions must become the matching $\textit{nums2}$ values at a cost of absolute differences; the last value can only be created by an append, which costs at least $1$. If some pair $(\textit{nums1}[i],\textit{nums2}[i])$ already covers $\textit{nums2}[n]$, the append needs no extra change; otherwise we also move the nearer endpoint onto that last value.
+
+<!-- thinking:end -->
 
 We define an answer variable $\text{ans}$ to record the minimum number of operations, with an initial value of $1$, representing the operation needed to append the last element to the end of the array.
 

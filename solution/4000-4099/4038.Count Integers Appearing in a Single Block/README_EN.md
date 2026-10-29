@@ -1,7 +1,12 @@
 ---
 comments: true
 difficulty: Easy
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4038.Count%20Integers%20Appearing%20in%20a%20Single%20Block/README_EN.md
+rating: 1165
+source: Weekly Contest 517 Q1
+tags:
+    - Array
+    - Hash Table
+    - Counting
 ---
 
 <!-- problem:start -->
@@ -71,6 +76,18 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4038.Co
 <!-- solution:start -->
 
 ### Solution 1: Count the Blocks of Each Integer
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> A special integer is one that forms exactly one contiguous equal block. Collecting every index of each value just to test contiguity would store extra lists.
+>
+> A scan increments a counter at the start of each block; afterwards we count how many values have counter $1$.
+>
+> The universe has size $100$, so a frequency table suffices.
+
+<!-- thinking:end -->
 
 Call each maximal run of consecutive equal elements a **block**. An integer $x$ is special if and only if it forms exactly one block.
 

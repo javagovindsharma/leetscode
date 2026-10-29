@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 中等
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3702.Longest%20Subsequence%20With%20Non-Zero%20Bitwise%20XOR/README.md
 rating: 1489
 source: 第 470 场周赛 Q2
 tags:
@@ -68,6 +67,14 @@ tags:
 <!-- solution:start -->
 
 ### 方法一：脑筋急转弯
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> $n\le 10^5$，不能枚举子序列。子序列的异或等于全体异或再去掉若干元素；若全体异或已非零，则整段即为答案。若所有元素都是 $0$，则任何子序列异或都为 $0$。否则全体异或为 $0$ 且存在非零元素，删去其中一个非零元素即可使剩余异或非零。因此一遍扫描全体异或与零的个数即可判定。
+
+<!-- thinking:end -->
 
 如果数组中所有元素的按位异或结果不为零，那么整个数组即为所求最长子序列，长度为数组长度。
 

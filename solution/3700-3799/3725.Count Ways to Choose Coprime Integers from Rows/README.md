@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 困难
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3725.Count%20Ways%20to%20Choose%20Coprime%20Integers%20from%20Rows/README.md
 rating: 1981
 source: 第 168 场双周赛 Q4
 tags:
@@ -103,6 +102,14 @@ tags:
 <!-- solution:start -->
 
 ### 方法一
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 每行恰选一个数，方案数要对 $10^9+7$ 取模；直接枚举组合会随行数指数增长。选完后只关心全体 $\gcd$ 是否为 $1$，因此按行做 DP，状态为「已选数字的当前 $\gcd$」。最后把 $\gcd=1$ 的方案相加。
+
+<!-- thinking:end -->
 
 <!-- tabs:start -->
 

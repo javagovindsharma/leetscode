@@ -1,7 +1,11 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4034.Minimum%20Bishop%20Moves%20to%20Reach%20Target/README_EN.md
+rating: 1244
+source: Biweekly Contest 190 Q1
+tags:
+    - Array
+    - Math
 ---
 
 <!-- problem:start -->
@@ -32,7 +36,7 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4034.Mi
 
 <p><strong>Explanation:</strong></p>
 
-<p><strong>​​​​​​​</strong><img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/4000-4099/4034.Minimum%20Bishop%20Moves%20to%20Reach%20Target/images/image.png" style="width: 300px; height: 307px;" /></p>
+<p><strong>​​​​​​​<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/4000-4099/4034.Minimum%20Bishop%20Moves%20to%20Reach%20Target/images/111.png" style="width: 300px; height: 303px;" />​​​​​​​</strong></p>
 
 <p>A single diagonal move takes the bishop straight from <code>(8, 1)</code> to <code>(1, 8)</code>.</p>
 </div>
@@ -46,7 +50,7 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4034.Mi
 
 <p><strong>Explanation:</strong></p>
 
-<p><img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/4000-4099/4034.Minimum%20Bishop%20Moves%20to%20Reach%20Target/images/screenshot-2026-07-23-at-23625am.png" style="width: 300px; height: 305px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/4000-4099/4034.Minimum%20Bishop%20Moves%20to%20Reach%20Target/images/22-ezgifcom-invert-colors.png" style="width: 300px; height: 305px;" /></p>
 
 <p>The bishop moves from <code>(4, 2)</code> to <code>(3, 1)</code>, then from <code>(3, 1)</code> to <code>(1, 3)</code>, reaching the target in 2 moves.</p>
 </div>
@@ -79,6 +83,18 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4034.Mi
 <!-- solution:start -->
 
 ### Solution 1: Case Analysis
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> A bishop stays on diagonals, so each move changes row and column by the same amount and $(r+c)\bmod 2$ is invariant. Opposite colours are unreachable; no search is required.
+>
+> On the same colour, one move suffices if the squares already share a diagonal; otherwise any two same-colour squares on an $8\times 8$ board have a common intermediate, so the distance is $2$.
+>
+> The case analysis yields only $-1$, $1$, or $2$, in constant time.
+
+<!-- thinking:end -->
 
 A bishop only moves along diagonals, and each move changes the row and the column by the same amount, so $(r + c) \bmod 2$ never changes. In other words, the bishop can only stand on squares of the same color as its starting square. If $(sr + sc)$ and $(tr + tc)$ have different parities, the bishop can never reach the target, so we return $-1$.
 

@@ -1,7 +1,12 @@
 ---
 comments: true
 difficulty: Easy
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4030.Check%20ASCII%20Palindromic/README_EN.md
+rating: 1165
+source: Weekly Contest 516 Q1
+tags:
+    - Bit Manipulation
+    - Two Pointers
+    - String
 ---
 
 <!-- problem:start -->
@@ -69,6 +74,16 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4030.Ch
 <!-- solution:start -->
 
 ### Solution 1: Simulation
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> Each character expands to a fixed $8$-bit string, including leading zeros, and we test whether the concatenation is a palindrome. $n$ is small enough that we need not rewrite the test in terms of character pairs.
+>
+> Build $t$ in order and compare it with its reverse.
+
+<!-- thinking:end -->
 
 Following the problem statement, we replace each character of $s$ with the $8$-bit binary representation of its ASCII value (including leading zeros), concatenate them in order to obtain a binary string $t$, and then check whether $t$ is a palindrome.
 

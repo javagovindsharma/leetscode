@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4008.Minimum%20Initial%20Strength%20to%20Defeat%20All%20Monsters/README_EN.md
 rating: 1776
 source: Biweekly Contest 188 Q3
 tags:
@@ -99,6 +98,18 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1: Difference Array + Binary Search
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> A larger initial strength always makes it easier to defeat every monster, so the feasibility predicate is monotone and admits binary search.
+>
+> Applying every boost as a range add inside each check would multiply the cost by the number of boosts. A difference array turns each boost into two endpoint updates; a single scan with the monsters then tests a candidate in $O(n)$.
+>
+> An upper bound of $10^{15}$ already covers the sum of all monster strengths, so binary search yields the minimum feasible start.
+
+<!-- thinking:end -->
 
 Each boost adds a value to an entire index range $[l, r]$, so we first apply all boosts using a difference array $d$. The $\textit{bonus}$ when fighting the $i$-th monster is then the prefix sum $\sum_{j=0}^{i} d[j]$.
 

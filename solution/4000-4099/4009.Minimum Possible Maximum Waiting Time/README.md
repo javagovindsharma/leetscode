@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 困难
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4009.Minimum%20Possible%20Maximum%20Waiting%20Time/README.md
 rating: 2498
 source: 第 188 场双周赛 Q4
 tags:
@@ -165,6 +164,18 @@ tags:
 <!-- solution:start -->
 
 ### 方法一
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 车辆必须按下标顺序获准加油，且只有两台油量有限的加油机。若枚举每辆车分给哪一台，方案数为 $2^n$， $n\le 50$ 时不能展开。
+>
+> 目标是先最大化被服务的前缀长度，再在这些方案中最小化最大等待。状态因此需要同时记住两台机器的剩余油量与下一次空闲时刻。
+>
+> $\textit{demand}[i]\le 20$、 $\textit{fuel}[j]\le 50$，油量维度很小，可在「已服务前缀 + 两机状态」上做记忆化转移。
+
+<!-- thinking:end -->
 
 <!-- tabs:start -->
 

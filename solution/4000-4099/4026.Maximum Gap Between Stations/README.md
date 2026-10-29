@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 中等
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4026.Maximum%20Gap%20Between%20Stations/README.md
 rating: 1675
 source: 第 515 场周赛 Q3
 tags:
@@ -106,6 +105,18 @@ tags:
 <!-- solution:start -->
 
 ### 方法一：贪心
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 最大间隔只可能出现在某对相邻工人之间。要拉大 $(i,i+1)$，左侧工人应尽量靠左、右侧尽量靠右，且技能必须与工位匹配。
+>
+> 从右向左预处理每人在「更右侧工人已占更右工位」时能分到的最右匹配位置，再从左向右把当前工人放到最左匹配工位，用二者之差更新答案。
+>
+> 只有一名工人时不存在间隔，答案为 $0$。
+
+<!-- thinking:end -->
 
 最大间隔一定出现在某对相邻工人 $(i, i+1)$ 之间。要最大化这一对的间隔，应让工人 $0, 1, \ldots, i$ 尽量靠左分配，工人 $i+1, \ldots, n-1$ 尽量靠右分配。
 

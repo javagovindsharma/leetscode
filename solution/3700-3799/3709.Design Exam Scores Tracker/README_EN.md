@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3709.Design%20Exam%20Scores%20Tracker/README_EN.md
 rating: 1647
 source: Biweekly Contest 167 Q3
 tags:
@@ -78,6 +77,14 @@ examTracker.totalScore(2, 5); // Between time 2 and time 5, Alice took 1 exam at
 <!-- solution:start -->
 
 ### Solution 1: Prefix Sum + Binary Search
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> `record` inserts in increasing time and `totalScore` asks for a range sum of scores. Ordered times make a range sum a difference of prefix sums; binary search locates the two ends on the time array, which we keep in lockstep with the prefix array.
+
+<!-- thinking:end -->
 
 We use an array $\textit{times}$ to store the time points of each exam, and another array $\textit{pre}$ to store the prefix sums, where $\textit{pre}[i]$ represents the total score of the first $i$ exams. For each call to $\texttt{record}(time, score)$, we add $time$ to $\textit{times}$ and add the last element of $\textit{pre}$ plus $score$ to $\textit{pre}$.
 

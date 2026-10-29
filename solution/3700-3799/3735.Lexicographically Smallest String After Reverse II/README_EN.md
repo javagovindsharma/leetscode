@@ -1,7 +1,12 @@
 ---
 comments: true
 difficulty: Hard
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3735.Lexicographically%20Smallest%20String%20After%20Reverse%20II/README_EN.md
+tags:
+    - String
+    - Binary Search
+    - Suffix Array
+    - Hash Function
+    - Rolling Hash
 ---
 
 <!-- problem:start -->
@@ -86,6 +91,14 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3735.Le
 <!-- solution:start -->
 
 ### Solution 1
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> As in the one-reverse-prefix-or-suffix problem, we perform exactly one operation and $k$ has only $n$ values. For each $k$ we compare reversing the first $k$ characters with reversing the last $k$, and keep the lexicographically smallest string.
+
+<!-- thinking:end -->
 
 <!-- tabs:start -->
 

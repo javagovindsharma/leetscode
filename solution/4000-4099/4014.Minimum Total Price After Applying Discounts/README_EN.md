@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4014.Minimum%20Total%20Price%20After%20Applying%20Discounts/README_EN.md
 rating: 1192
 source: Weekly Contest 514 Q1
 ---
@@ -102,6 +101,18 @@ source: Weekly Contest 514 Q1
 <!-- solution:start -->
 
 ### Solution 1: Greedy + Sorting
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> A discount of $d$ on price $p$ saves $p\times d/100$, so the same discount saves more on a more expensive item. Repeatedly picking the currently best pair would rescan the leftovers every time.
+>
+> Sorting both arrays and pairing them from large to small assigns larger discounts to higher prices, and is equivalent to that greedy choice.
+>
+> After the discounts run out, remaining items are added at full price.
+
+<!-- thinking:end -->
 
 To minimize the total price, we need to maximize the total amount saved by discounts. Applying a discount $d$ to an item with price $p$ saves $p \times d / 100$. By the rearrangement inequality, applying larger discounts to more expensive items maximizes the total savings.
 

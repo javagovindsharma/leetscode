@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3708.Longest%20Fibonacci%20Subarray/README_EN.md
 rating: 1380
 source: Biweekly Contest 167 Q2
 tags:
@@ -84,6 +83,14 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1: Dynamic Programming
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> The Fibonacci rule only looks at three consecutive entries, so a break forces a restart and we need not walk back from every right endpoint. A single variable stores the run ending at the current index: extend it when the recurrence holds, otherwise reset it to $2$ (any pair is valid).
+
+<!-- thinking:end -->
 
 We can use a variable $f$ to record the length of the longest Fibonacci subarray ending at the current element. Initially, $f=2$, indicating that any two elements can form a Fibonacci subarray.
 

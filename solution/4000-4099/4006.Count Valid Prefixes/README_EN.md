@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Easy
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4006.Count%20Valid%20Prefixes/README_EN.md
 rating: 1242
 source: Biweekly Contest 188 Q1
 tags:
@@ -75,6 +74,18 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1: Counting
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> A prefix is valid if and only if the absolute difference between the counts of `'0'` and `'1'` is at most $1$. Recounting both characters on every prefix would be quadratic.
+>
+> A single variable $t$ tracks the difference from left to right: increment on `'1'`, decrement on `'0'`. At each index we test $|t|\le 1$.
+>
+> The whole count is therefore a linear scan; we need not store a count array for every prefix.
+
+<!-- thinking:end -->
 
 A string can be rearranged into an alternating string if and only if the counts of `'0'` and `'1'` in it differ by at most $1$.
 

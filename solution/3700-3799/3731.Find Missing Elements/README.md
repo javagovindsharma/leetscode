@@ -1,7 +1,12 @@
 ---
 comments: true
 difficulty: 简单
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3731.Find%20Missing%20Elements/README.md
+rating: 1217
+source: 第 474 场周赛 Q1
+tags:
+    - 数组
+    - 哈希表
+    - 排序
 ---
 
 <!-- problem:start -->
@@ -76,6 +81,14 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3731.Fi
 <!-- solution:start -->
 
 ### 方法一：哈希表
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 范围由数组最小、最大值确定，缺失值即该闭区间中未出现者。 $n\le 100$，放入集合后扫描 $(\textit{mn},\textit{mx})$ 即可按升序列出。
+
+<!-- thinking:end -->
 
 我们先找出数组 $\textit{nums}$ 中的最小值和最大值，记为 $\textit{mn}$ 和 $\textit{mx}$。然后我们使用哈希表存储数组 $\textit{nums}$ 中的所有元素。
 

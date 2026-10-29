@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4021.Minimum%20Operations%20to%20Make%20a%20Rotated%20Palindrome%20I/README_EN.md
 rating: 1517
 source: Biweekly Contest 189 Q2
 tags:
@@ -79,6 +78,18 @@ One optimal solution:
 <!-- solution:start -->
 
 ### Solution 1: Enumeration
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> There are only $n\le 2000$ left rotations, and pairing characters after each rotation is $O(n^2)$, which fits the limit.
+>
+> Letters may only increment around the alphabet, so the cheapest way to equalise a pair is the shorter arc $\min(d,26-d)$; the optimal target is one of the two letters.
+>
+> Adding the rotation cost $k$ to every pair's increment cost and taking the minimum yields the answer.
+
+<!-- thinking:end -->
 
 We enumerate the number of left rotations $k$ ($0 \leq k < n$), which costs $k$ operations. After $k$ left rotations, index $i$ in the new string corresponds to index $(i + k) \bmod n$ in the original string.
 

@@ -1,7 +1,13 @@
 ---
 comments: true
 difficulty: 中等
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3732.Maximum%20Product%20of%20Three%20Elements%20After%20One%20Replacement/README.md
+rating: 1529
+source: 第 474 场周赛 Q2
+tags:
+    - 贪心
+    - 数组
+    - 数学
+    - 排序
 ---
 
 <!-- problem:start -->
@@ -82,6 +88,14 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3732.Ma
 <!-- solution:start -->
 
 ### 方法一：排序
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 必须改恰好一个元素，替换值可取到 $\pm 10^5$。乘积最大只可能来自「两个最小负数再乘 $10^5$」「两个最大正数再乘 $10^5$」或「最小与最大再乘 $-10^5$」。排序后这四个端点即可比较。
+
+<!-- thinking:end -->
 
 根据题目描述，我们可以将数组中的一个元素替换为范围 $[-10^5, 10^5]$ 内的任意整数。为了最大化三个元素的乘积，我们可以考虑以下几种情况：
 

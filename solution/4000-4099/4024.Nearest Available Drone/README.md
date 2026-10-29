@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 简单
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4024.Nearest%20Available%20Drone/README.md
 rating: 1184
 source: 第 515 场周赛 Q1
 tags:
@@ -98,6 +97,18 @@ tags:
 <!-- solution:start -->
 
 ### 方法一：遍历
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 一架无人机可达，当且仅当它到目标的曼哈顿距离不超过自身 $\textit{range}$。没有更复杂的几何约束。
+>
+> 线性扫描每架无人机，维护当前最小距离及其下标；仅在距离严格更小时更新，即可在距离并列时保留更小的下标。
+>
+> 若没有任何一架可达，答案保持为 $-1$。
+
+<!-- thinking:end -->
 
 我们遍历每一架无人机，计算其与目标的曼哈顿距离 $d = |x_i - t_x| + |y_i - t_y|$。若 $d \le \textit{range}_i$，则该无人机可达。在所有可达无人机中，选择距离最小的一架；若距离相同，由于我们从左到右遍历且仅在距离严格更小时更新答案，因此会自动保留更小的下标。若没有可达无人机，返回 $-1$。
 

@@ -1,7 +1,12 @@
 ---
 comments: true
 difficulty: 中等
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4039.Sum%20of%20Decoded%20Numbers/README.md
+rating: 1463
+source: 第 517 场周赛 Q2
+tags:
+    - 数组
+    - 数学
+    - 模拟
 ---
 
 <!-- problem:start -->
@@ -106,6 +111,16 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4039.Su
 <!-- solution:start -->
 
 ### 方法一：模拟 + 快速幂
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 每个元素独立解码：宽度取末位，其余数字按宽度拆成 $x$ 与 $y$，再计算 $x^y$。元素之间没有共享状态。
+>
+> $y$ 可达 $10^9$，按乘法循环累加不可行。快速幂在 $O(\log y)$ 内求出 $x^y\bmod(10^9+7)$，再把各元素的结果累加取模。
+
+<!-- thinking:end -->
 
 我们直接按照题目描述对每个元素进行解码。对于 $\textit{nums}$ 中的每个元素 $v$，其宽度为 $w = v \bmod 10$，去掉末位后的数字为 $d = \lfloor v / 10 \rfloor$。将 $d$ 转成十进制字符串 $s$，那么 $x$ 为 $s$ 的前 $w$ 个字符对应的整数，而 $y$ 为剩余字符对应的整数。
 

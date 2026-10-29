@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Hard
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3729.Count%20Distinct%20Subarrays%20Divisible%20by%20K%20in%20Sorted%20Array/README_EN.md
 rating: 2248
 source: Weekly Contest 473 Q4
 tags:
@@ -72,6 +71,14 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> The array is nondecreasing and $n\le 10^5$. Prefix sums modulo $k$ count every subarray whose sum is divisible by $k$, but identical value sequences are over-counted. We then walk equal-value runs and subtract the extra copies whose length makes the run-sum divisible by $k$, leaving distinct sequences.
+
+<!-- thinking:end -->
 
 <!-- tabs:start -->
 
@@ -212,7 +219,7 @@ function numGoodSubarrays(nums: number[], k: number): number {
     }
 
     const n = nums.length;
-    for (let i = 0; i < n; ) {
+    for (let i = 0; i < n;) {
         let j = i + 1;
         while (j < n && nums[j] === nums[i]) ++j;
         const m = j - i;

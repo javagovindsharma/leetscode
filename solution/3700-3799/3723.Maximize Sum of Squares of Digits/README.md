@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 中等
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3723.Maximize%20Sum%20of%20Squares%20of%20Digits/README.md
 rating: 1536
 source: 第 168 场双周赛 Q2
 tags:
@@ -103,6 +102,14 @@ tags:
 
 ### 方法一：贪心
 
+<!-- thinking:start -->
+
+> **思考**
+>
+> 直接枚举所有恰好 $\text{num}$ 位、数位和为 $\text{sum}$ 的整数并比较分数，在 $\text{num}$ 达到 $2\times 10^5$ 时无法完成。候选规模随位数指数增长，而平方和仍与数字的分布有关，比较本身成为瓶颈。由于平方在非负整数上是凸函数，总和固定时数字越集中平方和越大，最优的数字多重集只能是尽可能多的 $9$ 再加上至多一个余数。我们把这些较大的数字从高位写起：平方和不变，同时在所有同分整数中取到数值最大者，因此答案可以按这一顺序直接拼成字符串。
+
+<!-- thinking:end -->
+
 如果 $\text{num} \times 9 < \text{sum}$，则不存在符合要求的好整数，返回空字符串。
 
 否则，我们可以尽可能多地使用数字 $9$ 来组成好整数，因为 $9$ 的平方最大，可以使分数最大化。具体地，我们计算 $\text{sum}$ 中包含多少个 $9$，记为 $k$，以及剩余的部分 $s = \text{sum} - 9 \times k$。然后，我们构造好整数的前 $k$ 位为 $9$，如果 $s > 0$，则在后面添加一位数字 $s$，最后用 $0$ 补齐到总共 $\text{num}$ 位。
@@ -121,7 +128,7 @@ class Solution:
         k, s = divmod(sum, 9)
         ans = "9" * k
         if s:
-            ans += digits[s]
+            ans += str(s)
         ans += "0" * (num - len(ans))
         return ans
 ```
@@ -208,6 +215,74 @@ function maxSumOfSquares(num: number, sum: number): string {
 
     return ans;
 }
+```
+
+#### Rust
+
+```rust
+impl Solution {
+    pub fn max_sum_of_squares(num: i32, sum: i32) -> String {
+        if num * 9 < sum {
+            return String::new();
+        }
+        let k = sum / 9;
+        let s = sum % 9;
+        let mut ans = "9".repeat(k as usize);
+        if s > 0 {
+            ans.push((b'0' + s as u8) as char);
+        }
+        if ans.len() < num as usize {
+            ans.push_str(&"0".repeat(num as usize - ans.len()));
+        }
+        ans
+    }
+}
+```
+
+#### C#
+
+```cs
+public class Solution {
+    public string MaxSumOfSquares(int num, int sum) {
+        if (num * 9 < sum) {
+            return "";
+        }
+        int k = sum / 9;
+        int s = sum % 9;
+        var ans = new StringBuilder(num);
+        ans.Append('9', k);
+        if (s > 0) {
+            ans.Append(s);
+        }
+        ans.Append('0', num - ans.Length);
+        return ans.ToString();
+    }
+}
+```
+
+#### JavaScript
+
+```js
+/**
+ * @param {number} num
+ * @param {number} sum
+ * @return {string}
+ */
+var maxSumOfSquares = function (num, sum) {
+    if (num * 9 < sum) {
+        return '';
+    }
+    const k = Math.floor(sum / 9);
+    const s = sum % 9;
+    let ans = '9'.repeat(k);
+    if (s > 0) {
+        ans += String.fromCharCode('0'.charCodeAt(0) + s);
+    }
+    if (ans.length < num) {
+        ans += '0'.repeat(num - ans.length);
+    }
+    return ans;
+};
 ```
 
 <!-- tabs:end -->

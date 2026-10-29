@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Easy
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4000.Largest%20Integer%20With%20Given%20Digit%20Sum/README_EN.md
 rating: 1199
 source: Weekly Contest 512 Q1
 tags:
@@ -75,6 +74,18 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1: Greedy
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> Forming an $n$-digit integer with digit sum $s$ by enumerating every feasible number is possible for $n\le 5$, yet unnecessary.
+>
+> With a fixed digit sum, magnitude is decided by the higher places: increasing a high digit outweighs any rearrangement of the lower ones. We therefore fill from high to low with $\min(s,9)$ and leave the remainder for later digits.
+>
+> If $n\times 9<s$, even a string of nines cannot meet the sum, so the answer is $-1$.
+
+<!-- thinking:end -->
 
 If $n \times 9 < s$, even filling every digit with $9$ cannot reach digit sum $s$, so return $-1$.
 

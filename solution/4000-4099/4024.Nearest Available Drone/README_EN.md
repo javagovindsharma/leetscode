@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Easy
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4024.Nearest%20Available%20Drone/README_EN.md
 rating: 1184
 source: Weekly Contest 515 Q1
 tags:
@@ -94,6 +93,18 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1: Traversal
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> A drone can reach the target if and only if its Manhattan distance is at most its own $\textit{range}$. There is no further geometric constraint.
+>
+> A linear scan keeps the current minimum distance and its index, updating only on a strictly smaller distance so that ties retain the smaller index.
+>
+> If no drone is reachable, the answer stays $-1$.
+
+<!-- thinking:end -->
 
 We iterate through each drone and compute the Manhattan distance $d = |x_i - t_x| + |y_i - t_y|$ to the target. If $d \le \textit{range}_i$, the drone can reach the target. Among all reachable drones, we choose the one with the minimum distance. If there is a tie, we keep the smaller index because we scan from left to right and only update when the distance is strictly smaller. If no drone can reach the target, return $-1$.
 

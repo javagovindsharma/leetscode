@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 中等
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3719.Longest%20Balanced%20Subarray%20I/README.md
 rating: 1467
 source: 第 472 场周赛 Q2
 tags:
@@ -94,6 +93,14 @@ tags:
 <!-- solution:start -->
 
 ### 方法一：哈希表 + 枚举
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 平衡只统计不同偶数与不同奇数的个数，重复值不应重复计数。约束允许 $O(n^2)$：固定左端点向右扫描，用集合记录已出现值，仅在首次出现时更新奇偶计数。
+
+<!-- thinking:end -->
 
 我们可以枚举子数组的左端点 $i$，然后从左端点开始向右枚举右端点 $j$，在枚举的过程中使用一个哈希表 $\textit{vis}$ 来记录子数组中出现过的数字，同时使用一个长度为 $2$ 的数组 $\textit{cnt}$ 来分别记录子数组中不同偶数和不同奇数的数量。当 $\textit{cnt}[0] = \textit{cnt}[1]$ 时，更新答案 $\textit{ans} = \max(\textit{ans}, j - i + 1)$。
 
@@ -212,6 +219,37 @@ function longestBalanced(nums: number[]): number {
         }
     }
     return ans;
+}
+```
+
+#### Rust
+
+```rust
+use std::collections::HashSet;
+
+impl Solution {
+    pub fn longest_balanced(nums: Vec<i32>) -> i32 {
+        let n = nums.len();
+        let mut ans: i32 = 0;
+
+        for i in 0..n {
+            let mut vis: HashSet<i32> = HashSet::new();
+            let mut cnt = [0i32; 2];
+
+            for j in i..n {
+                if !vis.contains(&nums[j]) {
+                    vis.insert(nums[j]);
+                    let idx = (nums[j] & 1) as usize;
+                    cnt[idx] += 1;
+                }
+                if cnt[0] == cnt[1] {
+                    ans = ans.max((j - i + 1) as i32);
+                }
+            }
+        }
+
+        ans
+    }
 }
 ```
 

@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3722.Lexicographically%20Smallest%20String%20After%20Reverse/README_EN.md
 rating: 1414
 source: Biweekly Contest 168 Q1
 tags:
@@ -29,9 +28,7 @@ tags:
 	<li>reverse the <strong>last</strong> <code>k</code> characters of <code>s</code>.</li>
 </ul>
 
-<p>Return the <strong>lexicographically smallest</strong> string that can be obtained after <strong>exactly</strong> one such operation.</p>
-
-<p>A string <code>a</code> is <strong>lexicographically smaller</strong> than a string <code>b</code> if, at the first position where they differ, <code>a</code> has a letter that appears earlier in the alphabet than the corresponding letter in <code>b</code>. If the first <code>min(a.length, b.length)</code> characters are the same, then the shorter string is considered lexicographically smaller.</p>
+<p>Return the <strong><span data-keyword="lexicographically-smaller-string">lexicographically smallest</span></strong> string that can be obtained after <strong>exactly</strong> one such operation.</p>
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
@@ -94,6 +91,14 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1: Enumeration
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> We must reverse exactly one prefix or suffix, so there are only $n$ choices of $k$. Enumerating each $k$, building both candidates, and taking the lexicographically smallest string is enough.
+
+<!-- thinking:end -->
 
 We can enumerate all possible values of $k$ ($1 \leq k \leq n$). For each $k$, we compute the string obtained by reversing the first $k$ characters and the string obtained by reversing the last $k$ characters, then take the lexicographically smallest string among them as the final answer.
 

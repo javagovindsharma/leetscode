@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 困难
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4027.Elevator%20Requests%20III/README.md
 rating: 2200
 source: 第 515 场周赛 Q4
 tags:
@@ -108,6 +107,18 @@ tags:
 <!-- solution:start -->
 
 ### 方法一：状态压缩 DP
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 楼层编号可达 $10^9$，请求却只有 $m\le 16$ 个，旅行商规模刚好允许状压。到达时间是下界：早到必须等待。
+>
+> 定义 $f[S][j]$ 为已处理集合 $S$、最后处理请求 $j$ 的最早时刻。从空集出发时，耗时为 $\max(|\textit{start}-\textit{floor}_j|,\textit{arrival}_j)$；否则枚举上一个请求 $j_0$，用 $\max(f[S\setminus\{j\}][j_0]+距离,\textit{arrival}_j)$ 转移。
+>
+> 全集上最后一维的最小值即处理完全部请求的最短时间。
+
+<!-- thinking:end -->
 
 楼层数 $n$ 可达 $10^9$，但请求数 $m \le 16$，因此只需在至多 $m$ 个目标楼层之间规划路径。
 

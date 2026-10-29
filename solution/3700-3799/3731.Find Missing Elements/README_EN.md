@@ -1,7 +1,12 @@
 ---
 comments: true
 difficulty: Easy
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3731.Find%20Missing%20Elements/README_EN.md
+rating: 1217
+source: Weekly Contest 474 Q1
+tags:
+    - Array
+    - Hash Table
+    - Sorting
 ---
 
 <!-- problem:start -->
@@ -74,6 +79,14 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3731.Fi
 <!-- solution:start -->
 
 ### Solution 1: Hash Table
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> The range is determined by the minimum and maximum of the array; missing values are the integers inside that interval that never appear. With $n\le 100$, a set plus a scan of $(\textit{mn},\textit{mx})$ lists them in order.
+
+<!-- thinking:end -->
 
 We first find the minimum and maximum values in the array $\textit{nums}$, denoted as $\textit{mn}$ and $\textit{mx}$. Then we use a hash table to store all elements in the array $\textit{nums}$.
 

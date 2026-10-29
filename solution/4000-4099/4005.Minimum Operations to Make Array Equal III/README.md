@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 困难
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4005.Minimum%20Operations%20to%20Make%20Array%20Equal%20III/README.md
 tags:
     - 数组
     - 哈希表
@@ -96,6 +95,18 @@ tags:
 <!-- solution:start -->
 
 ### 方法一
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> $n$ 达 $10^5$、元素达 $10^9$，不能对每一对元素模拟乘除，也不能把所有可达整数当作相等目标逐一验证。
+>
+> 一次乘法或一次整除就可以把一个数跳到它的任意倍数或真因数，因而会合到同一目标的代价由公因数以及各自还需补上或剥去的因子决定，而不是中间整数的个数。
+>
+> 为此应先按因数分解压缩每个数，再在规模远小于 $10^9$ 的候选目标上累计最少操作。
+
+<!-- thinking:end -->
 
 <!-- tabs:start -->
 

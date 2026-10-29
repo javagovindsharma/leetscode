@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3706.Maximum%20Distance%20Between%20Unequal%20Words%20in%20Array%20II/README_EN.md
 tags:
     - Array
     - String
@@ -81,6 +80,14 @@ tags:
 <!-- solution:start -->
 
 ### Solution: Single Pass
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> $n\le 10^5$ forbids enumerating all unequal pairs. If neither endpoint of an optimal pair sat at a boundary, both boundary words would have to match the nearer endpoint, otherwise the pair could grow; then the two boundaries would differ and already give distance $n$, a contradiction. Hence an optimal endpoint lies at a boundary, and it suffices to compare every position with the first and last words.
+
+<!-- thinking:end -->
 
 We can observe that at least one of the two words with maximum distance must be at either end of the array (i.e., at index $0$ or $n - 1$). Otherwise, suppose the two words with maximum distance are at indices $i$ and $j$ where $0 < i < j < n - 1$. Then $\textit{words}[0]$ must be the same as $\textit{words}[j]$, and $\textit{words}[n - 1]$ must be the same as $\textit{words}[i]$ (otherwise the distance would be greater). This means $\textit{words}[0]$ and $\textit{words}[n - 1]$ are different, and their distance $n - 1 - 0 + 1 = n$ is definitely greater than $j - i + 1$, which contradicts our assumption. Therefore, at least one of the two words with maximum distance must be at either end of the array.
 

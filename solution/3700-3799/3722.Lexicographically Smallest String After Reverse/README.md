@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 中等
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3722.Lexicographically%20Smallest%20String%20After%20Reverse/README.md
 rating: 1414
 source: 第 168 场双周赛 Q1
 tags:
@@ -97,7 +96,15 @@ tags:
 
 ### 方法一：枚举
 
-我们可以枚举所有可能的 $k$ 值（$1 \leq k \leq n$），对于每个 $k$，我们计算反转前 $k$ 个字符和反转后 $k$ 个字符所得到的字符串，然后取其中字典序最小的字符串作为最终答案。
+<!-- thinking:start -->
+
+> **思考**
+>
+> 必须恰好反转一段前缀或后缀， $k$ 只有 $n$ 种。 $n$ 不大时枚举每个 $k$，分别构造两种结果并取字典序最小者。
+
+<!-- thinking:end -->
+
+我们可以枚举所有可能的 $k$ 值（ $1 \leq k \leq n$），对于每个 $k$，我们计算反转前 $k$ 个字符和反转后 $k$ 个字符所得到的字符串，然后取其中字典序最小的字符串作为最终答案。
 
 时间复杂度 $O(n^2)$，空间复杂度 $O(n)$。其中 $n$ 是字符串的长度。
 

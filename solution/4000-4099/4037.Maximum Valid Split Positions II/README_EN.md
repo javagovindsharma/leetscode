@@ -1,7 +1,13 @@
 ---
 comments: true
 difficulty: Hard
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4037.Maximum%20Valid%20Split%20Positions%20II/README_EN.md
+rating: 2372
+source: Biweekly Contest 190 Q4
+tags:
+    - Array
+    - Math
+    - Enumeration
+    - Number Theory
 ---
 
 <!-- problem:start -->
@@ -152,6 +158,18 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4037.Ma
 <!-- solution:start -->
 
 ### Solution 1: Prefix and Suffix GCD + Enumerate Candidate Removed Indices
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> Scoring every deletion in $O(n)$ no longer works for $n=10^5$. Each prefix GCD divides the previous one, so the chain changes at most $O(\log M)$ times.
+>
+> If neither the prefix nor the suffix GCD changes at an index, deleting it leaves every other GCD untouched and only merges two split positions, so the score cannot increase. Only indices where a GCD actually changes are worth recomputing.
+>
+> One forward mark and one backward mark produce $O(\log M)$ candidates; we rescore each deletion and take the maximum with the score of the intact array.
+
+<!-- thinking:end -->
 
 Following the idea of the previous problem, for an array $\textit{arr}$ of length $m$ we precompute the prefix GCD array $\textit{pre}$ and the suffix GCD array $\textit{suf}$. A split position $i$ is valid if and only if $\textit{pre}[i] = \textit{suf}[i + 1]$, so the score of $\textit{arr}$ is the number of indices satisfying this condition. However, $n$ can be as large as $10^5$ here, so enumerating every removed index and spending $O(n)$ on each of them is too slow.
 

@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3728.Stable%20Subarrays%20With%20Equal%20Boundary%20and%20Interior%20Sum/README_EN.md
 rating: 1908
 source: Weekly Contest 473 Q3
 tags:
@@ -86,6 +85,14 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1: Prefix Sum + Hash Table + Enumeration
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> $n\le 10^5$ forbids enumerating all segments of length at least $3$. After writing the condition with prefix sums, a right end $r$ needs a left end with the same boundary value whose interior sum equals that value. While scanning $r$ we insert the candidate $l=r-2$ into a hash map and query the pair $(\textit{capacity}[r],s[r])$.
+
+<!-- thinking:end -->
 
 We define a prefix sum array $\textit{s}$, where $s[i]$ represents the sum of the first $i$ elements in the array $\text{capacity}$, that is, $s[i] = \text{capacity}[0] + \text{capacity}[1] + \ldots + \text{capacity}[i-1]$. Initially, $s[0] = 0$.
 

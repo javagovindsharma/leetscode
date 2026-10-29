@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3713.Longest%20Balanced%20Substring%20I/README_EN.md
 rating: 1490
 source: Weekly Contest 471 Q2
 tags:
@@ -79,6 +78,14 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1: Enumeration + Counting
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> $n\le 1000$ allows enumerating all substrings. Balance means every character that appears has the same count, i.e. $\textit{maxFreq}\times\textit{kinds}=\textit{length}$. Fixing the left end and scanning right while maintaining frequencies and the kind count updates the answer in $O(n^2)$.
+
+<!-- thinking:end -->
 
 We can enumerate the starting position $i$ of substrings in the range $[0,..n-1]$, then enumerate the ending position $j$ of substrings in the range $[i,..,n-1]$, and use a hash table $\textit{cnt}$ to record the frequency of each character in substring $s[i..j]$. We use variable $\textit{mx}$ to record the maximum frequency of characters in the substring, and use variable $v$ to record the number of distinct characters in the substring. If at some position $j$, we have $\textit{mx} \times v = j - i + 1$, it means substring $s[i..j]$ is a balanced substring, and we update the answer $\textit{ans} = \max(\textit{ans}, j - i + 1)$.
 
@@ -207,6 +214,41 @@ function longestBalanced(s: string): number {
         }
     }
     return ans;
+}
+```
+
+#### Rust
+
+```rust
+impl Solution {
+    pub fn longest_balanced(s: String) -> i32 {
+        let n: i32 = s.len() as i32;
+        let bytes = s.as_bytes();
+        let mut ans: i32 = 0;
+
+        for i in 0..n {
+            let mut cnt: [i32; 26] = [0; 26];
+            let mut mx: i32 = 0;
+            let mut v: i32 = 0;
+
+            for j in i..n {
+                let c: usize = (bytes[j as usize] - b'a') as usize;
+                cnt[c] += 1;
+
+                if cnt[c] == 1 {
+                    v += 1;
+                }
+
+                mx = mx.max(cnt[c]);
+
+                if mx * v == j - i + 1 {
+                    ans = ans.max(j - i + 1);
+                }
+            }
+        }
+
+        ans
+    }
 }
 ```
 

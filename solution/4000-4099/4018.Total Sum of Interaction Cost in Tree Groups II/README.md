@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 困难
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4018.Total%20Sum%20of%20Interaction%20Cost%20in%20Tree%20Groups%20II/README.md
 tags:
     - 树
     - 深度优先搜索
@@ -129,6 +128,18 @@ tags:
 <!-- solution:start -->
 
 ### 方法一
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 同组点对的距离之和若按点对枚举，在 $n=10^5$ 的树上不可行。
+>
+> 树上路径唯一，每条边对答案的贡献等于它两侧、属于同一组的点数之积。为此一次 DFS 统计每个子树内各组出现次数，按边累加贡献即可，不必显式求出每一对的距离。
+>
+> 根选 $0$，子树信息自底向上合并，与分组标签的值域 $n$ 相容。
+
+<!-- thinking:end -->
 
 <!-- tabs:start -->
 

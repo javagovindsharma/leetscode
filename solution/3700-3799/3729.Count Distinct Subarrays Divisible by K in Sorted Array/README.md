@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 困难
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3729.Count%20Distinct%20Subarrays%20Divisible%20by%20K%20in%20Sorted%20Array/README.md
 rating: 2248
 source: 第 473 场周赛 Q4
 tags:
@@ -77,6 +76,14 @@ tags:
 <!-- solution:start -->
 
 ### 方法一
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 数组非降序， $n\le 10^5$。先用前缀和模 $k$ 统计所有和可被 $k$ 整除的子数组，其中相同数值的子数组被算了多次。再按相等段扣除「值相同但长度不同、且该段和能被 $k$ 整除」的重复，得到数值序列不同的个数。
+
+<!-- thinking:end -->
 
 <!-- tabs:start -->
 
@@ -217,7 +224,7 @@ function numGoodSubarrays(nums: number[], k: number): number {
     }
 
     const n = nums.length;
-    for (let i = 0; i < n; ) {
+    for (let i = 0; i < n;) {
         let j = i + 1;
         while (j < n && nums[j] === nums[i]) ++j;
         const m = j - i;

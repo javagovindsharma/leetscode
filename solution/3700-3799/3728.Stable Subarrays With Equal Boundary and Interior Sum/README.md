@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 中等
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3728.Stable%20Subarrays%20With%20Equal%20Boundary%20and%20Interior%20Sum/README.md
 rating: 1908
 source: 第 473 场周赛 Q3
 tags:
@@ -91,6 +90,14 @@ tags:
 <!-- solution:start -->
 
 ### 方法一：前缀和 + 哈希表 + 枚举
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> $n\le 10^5$，不能枚举所有长度至少为 $3$ 的区间。稳定条件写成前缀和后，右端点 $r$ 对应的左端点须满足 $\textit{capacity}[l]=\textit{capacity}[r]$ 且内部和等于该值。枚举 $r$ 时把合法的 $l=r-2$ 插入哈希表，按 $(\textit{capacity}[r],s[r])$ 查询即可。
+
+<!-- thinking:end -->
 
 我们定义一个前缀和数组 $\textit{s}$，其中 $s[i]$ 表示数组 $\text{capacity}$ 中前 $i$ 个元素的和，即 $s[i] = \text{capacity}[0] + \text{capacity}[1] + \ldots + \text{capacity}[i-1]$。初始时 $s[0] = 0$。
 

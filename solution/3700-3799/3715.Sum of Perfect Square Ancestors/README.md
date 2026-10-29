@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 困难
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3715.Sum%20of%20Perfect%20Square%20Ancestors/README.md
 rating: 2235
 source: 第 471 场周赛 Q4
 tags:
@@ -192,6 +191,14 @@ tags:
 <!-- solution:start -->
 
 ### 方法一
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> $n\le 10^5$，不能对每个点向上暴力跳祖先。 $nums[i]\cdot nums[anc]$ 为完全平方，当且仅当二者去掉平方因子后的核相同。树上 DFS 时用哈希表维护根到当前点的核出现次数，进入子树时累加、回溯时撤销。
+
+<!-- thinking:end -->
 
 <!-- tabs:start -->
 

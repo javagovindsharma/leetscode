@@ -1,7 +1,12 @@
 ---
 comments: true
 difficulty: 中等
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4031.Find%20All%20Numbers%20Disappeared%20in%20an%20Array%20II/README.md
+rating: 1416
+source: 第 516 场周赛 Q2
+tags:
+    - 数组
+    - 二分查找
+    - 排序
 ---
 
 <!-- problem:start -->
@@ -89,6 +94,18 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4031.Fi
 <!-- solution:start -->
 
 ### 方法一：排序
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 缺失的是 $[\textit{lower},\textit{upper}]$ 中未出现的连续段。若对范围内每个整数查询是否出现，值域可能远大于 $n$。
+>
+> 将出现值排序去重后，相邻两个落在区间内的数之间的空隙就是一段缺失；再补上相对 $\textit{lower}$ 与 $\textit{upper}$ 的两端空隙。
+>
+> 用 $\textit{prev}=\textit{lower}-1$ 扫描，遇到 $x-\textit{prev}>1$ 就写入 $[\textit{prev}+1,x-1]$。
+
+<!-- thinking:end -->
 
 我们将数组 $\textit{nums}$ 排序后扫描。用 $\textit{prev}$ 记录上一个已经出现在区间 $[\textit{lower}, \textit{upper}]$ 内的数，初始值为 $\textit{lower} - 1$。
 

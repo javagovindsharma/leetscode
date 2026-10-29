@@ -1,7 +1,11 @@
 ---
 comments: true
 difficulty: 困难
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4041.Minimum%20Operations%20to%20Form%20Subset%20Sum%20II/README.md
+rating: 2099
+source: 第 517 场周赛 Q4
+tags:
+    - 数组
+    - 动态规划
 ---
 
 <!-- problem:start -->
@@ -98,6 +102,18 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4041.Mi
 <!-- solution:start -->
 
 ### 方法一：0-1 背包
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 与上一题不同，乘除可以按任意顺序执行。出现在除法之前的乘法可以与之抵消，任何序列都能化成先除 $i$ 次再乘 $j$ 次，元素变为 $\lfloor x/2^i\rfloor\times 2^j$，代价为 $i+j$。
+>
+> 问题仍是恰好装满 $\textit{sum}$ 的 $0$-$1$ 背包，只是每个元素的取值枚举多了一维。容量倒序更新，保证每个元素至多选一种 $(i,j)$。
+>
+> 若 $f[\textit{sum}]$ 仍为无穷则返回 $-1$。
+
+<!-- thinking:end -->
 
 与上一题不同，本题的乘法和除法可以按任意顺序执行。注意到「先乘 2 再除以 2」是恒等操作，即 $\lfloor 2x / 2 \rfloor = x$，所以任何一次出现在除法之前的乘法都可以和它抵消，白白浪费两次操作。反复消去后，任意操作序列都能化归为「先除 $i$ 次，再乘 $j$ 次」，即元素 $x$ 能变成 $\lfloor x / 2^i \rfloor \times 2^j$，代价为 $i + j$。
 

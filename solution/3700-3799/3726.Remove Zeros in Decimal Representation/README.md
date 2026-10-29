@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: 简单
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3726.Remove%20Zeros%20in%20Decimal%20Representation/README.md
 rating: 1175
 source: 第 473 场周赛 Q1
 tags:
@@ -64,6 +63,14 @@ tags:
 <!-- solution:start -->
 
 ### 方法一：模拟
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> $n$ 可达 $10^{15}$，转成字符串再拼回去也可以，但按位处理不必额外存串。从低位取模 $10$，非零位按当前权 $k$ 累加到答案，零位跳过， $k$ 只在写入时乘 $10$。
+
+<!-- thinking:end -->
 
 我们从 $n$ 的最低位开始，逐位检查每个数字。如果该数字不为零，则将其添加到结果中。我们还需要一个变量来跟踪当前的位数，以便正确地构建最终的整数。
 

@@ -1,7 +1,13 @@
 ---
 comments: true
 difficulty: 中等
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4036.Lexicographically%20Largest%20String%20After%20Pair%20Transformations/README.md
+rating: 1704
+source: 第 190 场双周赛 Q3
+tags:
+    - 贪心
+    - 位运算
+    - 数组
+    - 字符串
 ---
 
 <!-- problem:start -->
@@ -85,6 +91,18 @@ edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4036.Le
 <!-- solution:start -->
 
 ### 方法一：贪心 + 二进制拆分
+
+<!-- thinking:start -->
+
+> **思考**
+>
+> 两个相邻且相同的字母可以合成字母表中的下一个，故 $\texttt{'a'}+j$ 等价于 $2^j$ 个 $\texttt{'a'}$。由 $x$ 个 $\texttt{'a'}$ 能得到的串，恰为权值和等于 $x$ 的串。
+>
+> 字典序最大应优先使用权值大的字母。从 $j=25$ 倒序取出 $t=\lfloor x/2^j\rfloor$ 个对应字母，并令 $x\leftarrow x\bmod 2^j$。
+>
+> 当 $j<25$ 时必有 $t\in\{0,1\}$，答案里只有 $\texttt{'z'}$ 可能相邻，而 $\texttt{"zz"}$ 无法再合并，因此得到的串合法且字典序最大。
+
+<!-- thinking:end -->
 
 由于两个相邻且相同的字母可以合并成字母表中的下一个字母，因此字母 $\texttt{'a'} + j$ 等价于 $2^j$ 个 $\texttt{'a'}$。也就是说，由 $x$ 个 $\texttt{'a'}$ 出发能够得到的字符串，恰好是那些字母权值之和等于 $x$ 的字符串。
 

@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/3700-3799/3720.Lexicographically%20Smallest%20Permutation%20Greater%20Than%20Target/README_EN.md
 rating: 1958
 source: Weekly Contest 472 Q3
 tags:
@@ -88,14 +87,49 @@ tags:
 
 <!-- solution:start -->
 
-### Solution 1
+### Solution 1: Greedy + Backtracking
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> A permutation strictly larger than $\textit{target}$ has the form “common prefix + a larger letter + the rest in sorted order”, and a longer prefix is lexicographically smaller. Match $\textit{target}$ as far as the letter counts allow, then walk back and at the first feasible position place the smallest remaining letter larger than $\textit{target}[i]$.
+
+<!-- thinking:end -->
+
+To be strictly greater than $\textit{target}$, the answer must look like this: it matches some prefix of $\textit{target}$ exactly, places a character greater than the corresponding character of $\textit{target}$ at the next position, and arranges the remaining characters in ascending order. The longer this common prefix is, the smaller the resulting permutation, so we want the common prefix to be as long as possible.
+
+We first count the occurrences of every character of $s$ in $\textit{cnt}$, then match $\textit{target}$ from left to right as far as we can: as long as the current character is still available we take it and append it to the answer, stopping once some character runs out. This yields the longest common prefix.
+
+Next we walk back from the end of that prefix, trying each position $i$ as the place where the answer diverges: we put the smallest still available character greater than $\textit{target}[i]$ at position $i$, and if that succeeds we append the remaining characters in ascending order and return. Otherwise we give $\textit{target}[i - 1]$ back to $\textit{cnt}$ and try an earlier position. Note that when $\textit{target}$ itself is a permutation of $s$, no character can be placed at position $n$, so we have to start backtracking from the last position because the answer must be strictly greater. If every position fails, no such permutation exists and we return an empty string.
+
+The time complexity is $O(n \times |\Sigma|)$, and the space complexity is $O(n + |\Sigma|)$. Here, $n$ is the length of the string $s$, and $|\Sigma| = 26$ is the size of the character set.
 
 <!-- tabs:start -->
 
 #### Python3
 
 ```python
-
+class Solution:
+    def lexGreaterPermutation(self, s: str, target: str) -> str:
+        cnt = Counter(s)
+        n = len(target)
+        ans = []
+        for c in target:
+            if cnt[c] == 0:
+                break
+            cnt[c] -= 1
+            ans.append(c)
+        for i in range(len(ans), -1, -1):
+            if i < n:
+                for c in ascii_lowercase:
+                    if c > target[i] and cnt[c] > 0:
+                        cnt[c] -= 1
+                        rest = ''.join(x * cnt[x] for x in ascii_lowercase)
+                        return ''.join(ans[:i]) + c + rest
+            if i > 0:
+                cnt[ans[i - 1]] += 1
+        return ''
 ```
 
 #### Java
@@ -114,6 +148,55 @@ tags:
 
 ```go
 
+```
+
+#### Rust
+
+```rust
+impl Solution {
+    pub fn lex_greater_permutation(s: String, target: String) -> String {
+        let mut permutation = s.into_bytes();
+        let target_bytes = target.as_bytes();
+        let mut letter_counts = [0usize; 26];
+        for &byte in &permutation {
+            letter_counts[(byte - b'a') as usize] += 1;
+        }
+        let mut prefix_length = 0;
+        while prefix_length < target_bytes.len() {
+            let target_letter = (target_bytes[prefix_length] - b'a') as usize;
+            if letter_counts[target_letter] == 0 {
+                break;
+            }
+            permutation[prefix_length] = target_bytes[prefix_length];
+            letter_counts[target_letter] -= 1;
+            prefix_length += 1;
+        }
+        loop {
+            if prefix_length < target_bytes.len() {
+                let next_letter = (target_bytes[prefix_length] - b'a') as usize + 1;
+                if let Some(replacement_letter) =
+                    (next_letter..26).find(|&letter| letter_counts[letter] > 0)
+                {
+                    permutation[prefix_length] = b'a' + replacement_letter as u8;
+                    letter_counts[replacement_letter] -= 1;
+                    let mut write_index = prefix_length + 1;
+                    for (letter, &count) in letter_counts.iter().enumerate() {
+                        for _ in 0..count {
+                            permutation[write_index] = b'a' + letter as u8;
+                            write_index += 1;
+                        }
+                    }
+                    return String::from_utf8(permutation).unwrap();
+                }
+            }
+            if prefix_length == 0 {
+                return String::new();
+            }
+            prefix_length -= 1;
+            letter_counts[(target_bytes[prefix_length] - b'a') as usize] += 1;
+        }
+    }
+}
 ```
 
 <!-- tabs:end -->

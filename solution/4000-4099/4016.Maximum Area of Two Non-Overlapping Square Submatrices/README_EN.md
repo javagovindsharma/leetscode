@@ -1,7 +1,6 @@
 ---
 comments: true
 difficulty: Medium
-edit_url: https://github.com/doocs/leetcode/edit/main/solution/4000-4099/4016.Maximum%20Area%20of%20Two%20Non-Overlapping%20Square%20Submatrices/README_EN.md
 rating: 1958
 source: Weekly Contest 514 Q3
 tags:
@@ -112,6 +111,18 @@ tags:
 <!-- solution:start -->
 
 ### Solution 1: Dynamic Programming + Enumerating Dividing Lines
+
+<!-- thinking:start -->
+
+> **Thinking**
+>
+> Two non-overlapping axis-aligned squares have disjoint row ranges or disjoint column ranges, so a horizontal or vertical cut always separates them. Enumerating the cut and then brute-forcing the largest all-ones square in each half is too slow.
+>
+> The largest square cornered at a cell is the standard DP, and prefix/suffix maxima over rows evaluate every horizontal cut in $O(mn)$. The area for a cut is the square of the smaller of the two side lengths.
+>
+> Vertical cuts reuse the same routine after a transpose; the answer is the larger of the two orientations.
+
+<!-- thinking:end -->
 
 Two non-overlapping axis-aligned rectangles can always be separated by a horizontal line or a vertical line (their row intervals or column intervals must be disjoint). Therefore, we only need to consider the case where one square lies entirely above some horizontal dividing line and the other below it, and the case where one lies entirely to the left of some vertical dividing line and the other to its right. The latter can be handled by transposing the matrix and reusing the logic of the former.
 
